@@ -153,14 +153,18 @@ body {
 	color: #FEE474;
 	background: #230004;
   padding: 20px 45px;
-  display: block;
   margin: 0 auto 15px;
   text-decoration: none;
   line-height: 1;
-  max-width: 420px;
+  max-width: 373px;
   font-size: 26px;
   text-transform: uppercase;
   letter-spacing: 0.09em;
+}
+
+#passages a:active,
+#passages a:focus {
+  filter: saturation(0) brightness(4);
 }
 
 #passages h1,
@@ -181,14 +185,12 @@ body {
 
 .passage p {
   margin: 35px auto;
-}
-
-.passage p {
   opacity: 0;
   animation-name: fadeIn;
   animation-duration: 350ms;
   animation-delay: 0.5s;
   animation-fill-mode: forwards;
+  pointer-events: none;
 }
 
 .passage p:nth-child(2) {
@@ -219,31 +221,6 @@ body {
   animation-delay: 10s;
 }
 
-.passage a {
-  opacity: 0;
-  visibility: hidden;
-  animation-name: fadeIn;
-  animation-duration: 350ms;
-  animation-delay: 0;
-  animation-fill-mode: forwards;
-}
-
-.passage a:nth-child(2) {
-  animation-delay: 300ms;
-}
-
-.passage a:nth-child(3) {
-  animation-delay: 600ms;
-}
-
-.passage a:nth-child(4) {
-  animation-delay: 900ms;
-}
-
-.passage a:nth-child(5) {
-  animation-delay: 1200ms;
-}
-
 img {
   max-width: 100%;
   max-height: 50vh;
@@ -263,8 +240,8 @@ br + br {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; visibility: hidden; }
-  to { opacity: 1; visibility: visible; }
+  0% { opacity: 0;  }
+  100% { opacity: 1; pointer-events: all; }
 }
 
 /* word styles */
@@ -297,12 +274,42 @@ br + br {
   font-style: normal;
 }
 
+/* UI Menu */
+#ui-bar {
+ width: 100%; 
+  left: -47px;
+  padding-left: 47px;
+}
 
+#ui-bar.stowed {
+  width: 100vw;
+  left: -100vw;
+}
+
+#ui-bar.stowed~#story {
+ margin: 0; 
+}
+
+#ui-bar-toggle {
+ right: -47px;
+  background: rgba(0,0,0,0.5);
+  border: 0;
+}
+
+#title {
+  line-height: 1.2;
+}
+
+#menu-item-saves {
+  display: none;
+}
   </style><script role="script" id="twine-user-script" type="text/twine-javascript">//--turn <br> into <p>
 Config.cleanupWikifierOutput = true;
 
 //--hides the sugarcube UI
-UIBar.destroy();
+//UIBar.destroy();
+
+Config.ui.stowBarInitially = true;
 
 /* with help from reddit: 
 https://www.reddit.com/r/twinegames/comments/f4faud/autosave_not_working_on_android_app_built_using/fhs2wi1/
@@ -350,9 +357,11 @@ Have you got some sort of a death wish?!
 
 [[Ignore the zombie]]
 [[Hit the zombie|Hit it really hard]]</tw-passagedata><tw-passagedata pid="5" name="Hit it really hard" tags="iterate" position="331,974" size="100,100">&lt;&lt;set $foughtZombiesC1 += 1&gt;&gt;
-&lt;p&gt;You&#39;re not exactly in great shape. You&#39;re malnourished &amp; tired.&lt;/p&gt;
+You&#39;re not exactly in great shape. You&#39;re malnourished &amp; tired.
 
-&lt;p&gt;But you hit the zombie enough to push it over, allowing you to get away.&lt;/p&gt;
+But you hit the zombie... 
+
+It&#39;s enough to push it over, allowing you to get away.
 
 [[Continue]]
 </tw-passagedata><tw-passagedata pid="6" name="Run away" tags="iterate" position="544,925" size="100,100">&lt;&lt;set $runFromZombiesC1 += 1&gt;&gt;
