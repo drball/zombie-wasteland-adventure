@@ -100,7 +100,7 @@ var saveAs=saveAs||navigator.msSaveBlob&&navigator.msSaveBlob.bind(navigator)||f
 		<div id="init-lacking">Your browser lacks required capabilities. Please upgrade it or switch to another to continue.</div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="Zombie wasteland Adventure" startnode="6" creator="Twine" creator-version="2.3.5" ifid="C08DCE08-9BAC-4CF6-997A-D83A19501A06" zoom="1" format="SugarCube" format-version="2.30.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* import font - only works online */
+	<tw-storydata name="Zombie wasteland Adventure" startnode="1" creator="Twine" creator-version="2.3.5" ifid="C08DCE08-9BAC-4CF6-997A-D83A19501A06" zoom="1" format="SugarCube" format-version="2.30.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* import font - only works online */
 @import url('https://fonts.googleapis.com/css?family=Londrina+Solid&display=swap');
 
 @import 'styles.css';
@@ -152,7 +152,7 @@ body {
   display: block;
 	color: #FEE474;
 	background: #230004;
-  padding: 20px 40px;
+  padding: 20px 45px;
   display: block;
   margin: 0 auto 15px;
   text-decoration: none;
@@ -187,40 +187,41 @@ body {
   opacity: 0;
   animation-name: fadeIn;
   animation-duration: 350ms;
-  animation-delay: 1s;
+  animation-delay: 0.5s;
   animation-fill-mode: forwards;
 }
 
 .passage p:nth-child(2) {
-  animation-delay: 3s;
+  animation-delay: 2s;
 }
 
 .passage p:nth-child(3) {
-  animation-delay: 6s;
+  animation-delay: 3.5s;
 }
 
 .passage p:nth-child(4) {
-  animation-delay: 9s;
+  animation-delay: 4s;
 }
 
 .passage p:nth-child(5) {
-  animation-delay: 12s;
+  animation-delay: 5.5s;
 }
 
 .passage p:nth-child(6) {
-  animation-delay: 15s;
+  animation-delay: 7s;
 }
 
 .passage p:nth-child(7) {
-  animation-delay: 18s;
+  animation-delay: 8.5s;
 }
 
 .passage p:nth-child(8) {
-  animation-delay: 21s;
+  animation-delay: 10s;
 }
 
 .passage a {
   opacity: 0;
+  visibility: hidden;
   animation-name: fadeIn;
   animation-duration: 350ms;
   animation-delay: 0;
@@ -262,8 +263,8 @@ br + br {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from { opacity: 0; visibility: hidden; }
+  to { opacity: 1; visibility: visible; }
 }
 
 /* word styles */
