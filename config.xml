@@ -21,6 +21,8 @@
 	<access origin="*" />
 	<preference name="android-minSdkVersion" value="21" />
 	<preference name="android-targetSdkVersion" value="28" />
+	
+	<gap:plugin name="org.apache.cordova.inappbrowser" />
 
 	<platform name="ios">
 		<icon src="res/icon/ios/icon-1024.png" width="1024" height="1024"/>
