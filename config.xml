@@ -65,11 +65,11 @@
 		<icon density="xxhdpi" src="res/icon/android/xxhdpi.png"/>
 		<icon density="xxxhdpi" src="res/icon/android/xxxhdpi.png"/> -->
 
-		<icon density="hdpi" src="res/icon/android/mipmap-hdpi/ic_launcher.png"/>
-		<icon density="hdpi" src="res/icon/android/mipmap-mdpi/ic_launcher.png"/>
-		<icon density="hdpi" src="res/icon/android/mipmap-xhdpi/ic_launcher.png"/>
-		<icon density="hdpi" src="res/icon/android/mipmap-xxhdpi/ic_launcher.png"/>
-		<icon density="hdpi" src="res/icon/android/mipmap-xxxhdpi/ic_launcher.png"/>
+		<icon density="hdpi" src="res/icon/android/mipmap-hdpi/launcher.png"/>
+		<icon density="hdpi" src="res/icon/android/mipmap-mdpi/launcher.png"/>
+		<icon density="hdpi" src="res/icon/android/mipmap-xhdpi/launcher.png"/>
+		<icon density="hdpi" src="res/icon/android/mipmap-xxhdpi/launcher.png"/>
+		<icon density="hdpi" src="res/icon/android/mipmap-xxxhdpi/launcher.png"/>
 
 		<!--  Portrait  -->
 		<splash density="port-ldpi" src="res/screen/android/splash-port-ldpi.png"/>
