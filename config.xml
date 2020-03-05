@@ -3,14 +3,14 @@
     xmlns:gap   = "http://phonegap.com/ns/1.0"
     id          = "com.daviddickball.zombiewasteland"
     versionCode = "10"
-    version     = "1.0.0" >
+    version     = "1.0.1" >
 
 <!-- versionCode is optional and Android only -->
 
 	<name>Zombie Wasteland Adventure</name>
 
 	<description>
-	  A short (and silly) text game about being caught short, for the purpose of testing the Twine engine with Phonegap.
+	  A game about making tough decisions and surviving zombies in The Wasteland.
 	</description>
 
 	<author href="http://daviddickball.uk/" email="david@ongoingworlds.com">
@@ -21,7 +21,7 @@
 	<access origin="*" />
 	<preference name="android-minSdkVersion" value="21" />
 	<preference name="android-targetSdkVersion" value="28" />
-	<preference name="phonegap-version" value="cli-9.0.0" />
+	<preference name="phonegap-version" value="cli-8.1.1" />
 	<plugin name="cordova-plugin-inappbrowser" spec="~3.2.0" />
 
 	<platform name="ios">
