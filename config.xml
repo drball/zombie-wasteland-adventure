@@ -22,7 +22,16 @@
 	<preference name="android-minSdkVersion" value="21" />
 	<preference name="android-targetSdkVersion" value="28" />
 	<preference name="phonegap-version" value="cli-9.0.0" />
-	<plugin name="cordova-plugin-inappbrowser" spec="~3.2.0" />
+
+	<plugin name="cordova-plugin-whitelist"/>
+	<allow-intent href="http://*/*"/>
+	<platform name="android">
+	  <allow-intent href="market:*"/>
+	</platform>
+	<platform name="ios">
+	  <allow-intent href="itms:*"/>
+	  <allow-intent href="itms-apps:*"/>
+	</platform>
 
 	<platform name="ios">
 		<icon src="res/icon/ios/icon-1024.png" width="1024" height="1024"/>
