@@ -21,7 +21,7 @@
 	<access origin="*" />
 	<preference name="android-minSdkVersion" value="21" />
 	<preference name="android-targetSdkVersion" value="28" />
-	<preference name="phonegap-version" value="cli-8.1.1" />
+	<preference name="phonegap-version" value="cli-9.0.0" />
 	<plugin name="cordova-plugin-inappbrowser" spec="~3.2.0" />
 
 	<platform name="ios">
