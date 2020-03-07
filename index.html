@@ -145,7 +145,9 @@ body {
 
 #passages {
   width: 100%;
+  max-width: 600px;
   text-align: center;
+  font-size: 24px;
 }
 
 #passages a,
@@ -166,6 +168,12 @@ body {
 #passages a:active,
 #passages a:focus {
   filter: saturation(0) brightness(4);
+}
+
+@media (orientation: portrait) and (min-device-width: 600px) {
+	#passages {
+  		font-size: 32px;
+	}
 }
 
 #passages h1,
@@ -408,6 +416,7 @@ Welcome to &lt;i class=&quot;wl&quot;&gt;The Wasteland!&lt;/i&gt;
 [[Start Game]]</tw-passagedata><tw-passagedata pid="2" name="Start Game" tags="iterate" position="516,334" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;set $foughtZombiesC1 to 0&gt;&gt;
 &lt;&lt;set $runFromZombiesC1 to 0&gt;&gt;
+&lt;&lt;set $checkedForZombiesC1 to false&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 You&#39;re alone in &lt;i class=&quot;wl&quot;&gt;the wasteland&lt;/i&gt;, except for a zombie.
 
@@ -450,7 +459,7 @@ You&#39;re hungry, tired &amp; alone. But you continue.
 [[Why am I here?|Question character]]
 </tw-passagedata><tw-passagedata pid="10" name="Question character" tags="" position="556,1212" size="100,100">You&#39;ve been in the wasteland for so long that you can&#39;t remember anything.
 
-Maybe things will become clearer after sleep &amp; some food?
+Maybe things will become clearer after sleep &amp; food?
 
 [[Find somewhere to sleep]]
 [[Find something to eat]]</tw-passagedata><tw-passagedata pid="11" name="Find somewhere to sleep" tags="" position="489,1358" size="100,100">In the distance you see an abandoned building. 
@@ -483,37 +492,39 @@ Don&#39;t worry about the past.
 
 &lt;&lt;include &quot;Cheesecake yes&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="Is there any cheesecake left?" tags="include" position="517,1810" size="100,100">Unlikely. Cheesecake doesn&#39;t last long in &lt;span class=&quot;wasteland&quot;&gt;The Wasteland&lt;/span&gt;.
 
-&lt;&lt;include &quot;Enter the supermarket&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="Enter the supermarket" tags="" position="663,1825" size="100,100">You enter the supermarket. It&#39;s been ransacked pretty badly. 
+&lt;&lt;include &quot;Enter the supermarket&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="Enter the supermarket" tags="condition" position="663,1825" size="100,100">You enter the supermarket. It&#39;s been ransacked pretty badly. 
 
 [[Check for zombies]]
-[[Search for food]]</tw-passagedata><tw-passagedata pid="19" name="Check for zombies" tags="" position="588,1975" size="100,100">It&#39;s good job you checked. There&#39;s a zombie at the back of the store, silently moving towards you. 
+[[Search for food|Search for food without checking]]
+&lt;&lt;set $checkedForZombiesC1 to false&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="Check for zombies" tags="decision" position="588,1975" size="100,100">It&#39;s good job you checked. There&#39;s a zombie at the back of the store, silently moving towards you. 
 
 [[Kill the zombie|Kill the zombie (supermarket)]]
-[[Quickly search for food|Search for food]]</tw-passagedata><tw-passagedata pid="20" name="Search for food" tags="Aquire" position="785,2298" size="100,100">You&#39;re so hungry, you don&#39;t bother to check for zombies. 
+[[Quickly search for food|Search for food after checking]]
+&lt;&lt;set $checkedForZombiesC1 to true&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="Search for food after checking" tags="Aquire" position="766,2198" size="100,100">You check for food. 
 
 You find a half eaten &lt;i class=&quot;item&quot;&gt;scotch egg&lt;/i&gt; &amp; a packet of &lt;i class=&quot;item&quot;&gt;rice crispies&lt;/i&gt;.
 
 [[Pickup scotch egg|Zombie attack][$supermarketItem to &quot;scotch egg&quot;]]
 [[Pickup packet of Rice Crispies|Zombie attack][$supermarketItem to &quot;rice crispies&quot;]]
 
-</tw-passagedata><tw-passagedata pid="21" name="Kill the zombie (supermarket)" tags="" position="519,2113" size="100,100">What with? 
+</tw-passagedata><tw-passagedata pid="21" name="Kill the zombie (supermarket)" tags="" position="518,2104" size="100,100">What with? 
 
 You&#39;ve got no weapons, &amp; you&#39;re really tired. 
 
 [[Search for a weapon]]
-[[Run away|Supermarket run away]]</tw-passagedata><tw-passagedata pid="22" name="Zombie attack" tags="" position="944,2342" size="100,100">You picked up the $supermarketItem
+[[Run away|Supermarket run away]]</tw-passagedata><tw-passagedata pid="22" name="Zombie attack" tags="condition" position="944,2342" size="100,100">You picked up the $supermarketItem
 
 You&#39;re about to eat your snack when... 
 
 A zombie attacks!
-
+&lt;&lt;if $checkedForZombiesC1 is false&gt;&gt;
 (You were too hungry to check earlier!)
-
+&lt;&lt;/if&gt;&gt;
 [[Attack the zombie|Attack zombie food supermarket]]
-[[Run away|run away supermarket food]]</tw-passagedata><tw-passagedata pid="23" name="Supermarket run away" tags="" position="291,2221" size="100,100">Are you sure you want to run away, just like that? 
+[[Run away|run away supermarket food]]</tw-passagedata><tw-passagedata pid="23" name="Supermarket run away" tags="" position="301,2188" size="100,100">Are you sure you want to run away, just like that? 
 
 [[Definitely. Run!]]
-[[Search for a weapon]] </tw-passagedata><tw-passagedata pid="24" name="Search for a weapon" tags="iterate" position="499,2304" size="100,100">&lt;&lt;nobr&gt;&gt;
+[[Search for a weapon]] </tw-passagedata><tw-passagedata pid="24" name="Search for a weapon" tags="iterate" position="483,2237" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;set $foughtZombiesC1 += 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 You look for something to use as a weapon. Unfortunately there aren&#39;t many options. 
@@ -521,13 +532,15 @@ You look for something to use as a weapon. Unfortunately there aren&#39;t many o
 You see a &lt;i class=&quot;item&quot;&gt;bottle of bleach&lt;/i&gt;, and a &lt;i class=&quot;item&quot;&gt;mop&lt;/i&gt;.
 
 [[Pickup bleach]]
-[[Pickup mop]]</tw-passagedata><tw-passagedata pid="25" name="Pickup bleach" tags="" position="424,2454" size="100,100">You squirt bleach over the zombie&#39;s face. It screams, giving you enough time to make your escape. 
+[[Pickup mop]]</tw-passagedata><tw-passagedata pid="25" name="Pickup bleach" tags="" position="351,2372" size="100,100">You pick up the bottle of bleach. Will this make a good weapon? 
 
-[[Continue|Outside supermarket fail]] </tw-passagedata><tw-passagedata pid="26" name="Pickup mop" tags="" position="550,2454" size="100,100">You drive the mop head into the zombie&#39;s face so hard that the handle breaks. 
+[[Use bleach on zombie]]
+[[Choose something else|Search for a weapon 2]]</tw-passagedata><tw-passagedata pid="26" name="Pickup mop" tags="" position="588,2370" size="100,100">You pick up the mop. 
 
-The zombie is distracted long enough for you to make your escape. 
+Will this make a good weapon?
 
-[[Continue|Outside supermarket fail]] </tw-passagedata><tw-passagedata pid="27" name="Definitely. Run!" tags="iterate" position="343,2617" size="100,100">&lt;&lt;nobr&gt;&gt;
+[[Attack zombie with mop]]
+[[Choose something else|Search for a weapon 2]]</tw-passagedata><tw-passagedata pid="27" name="Definitely. Run!" tags="iterate" position="218,2622" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;set $runFromZombiesC1 += 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 You leave the supermarket, back into &lt;i class=&quot;wasteland&quot;&gt;The Wasteland&lt;/i&gt;.
@@ -537,7 +550,7 @@ You leave the supermarket, back into &lt;i class=&quot;wasteland&quot;&gt;The Wa
 &lt;&lt;/nobr&gt;&gt;
 How do you attack it?
 
-[[&quot;Throw the &quot; + $supermarketItem|Throw food (supermarket)]]
+[[&quot;Throw &quot; + $supermarketItem + &quot; at zombie&quot;|Throw food (supermarket)]]
 [[Trip it up|Trip zombie (supermarket)]]</tw-passagedata><tw-passagedata pid="29" name="run away supermarket food" tags="Iterate" position="951,2569" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;set $runFromZombiesC1 += 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
@@ -545,7 +558,7 @@ You run away, still clutching the $supermarketItem.
 
 [[Continue|Outside supermarket win]] </tw-passagedata><tw-passagedata pid="30" name="Throw food (supermarket)" tags="" position="690,2620" size="100,100">The $supermarketItem hits the zombie, it doesn&#39;t harm it, but distracts it long enough for you to escape. 
 
-[[Continue|Outside supermarket fail]] </tw-passagedata><tw-passagedata pid="31" name="Outside supermarket fail" tags="" position="575,2805" size="100,100">You&#39;re outside the supermarket. 
+[[Continue|Outside supermarket fail]] </tw-passagedata><tw-passagedata pid="31" name="Outside supermarket fail" tags="" position="502,2855" size="100,100">You&#39;re outside the supermarket. 
 
 Well that was a pointless adventure that achieved nothing, wasn&#39;t it?
 
@@ -600,7 +613,7 @@ It&#39;s time to survive the night.
 
 But tomorrow, everything will change.
 
-[[Okay|Find some shelter]]</tw-passagedata><tw-passagedata pid="39" name="Iterate" tags="iterate" position="809,359" size="100,100">Iterate = blue</tw-passagedata><tw-passagedata pid="40" name="Condition" tags="condition" position="933,362" size="100,100">Condition = red</tw-passagedata><tw-passagedata pid="41" name="Find some shelter" tags="include" position="1723,569" size="100,100">As it starts to get dark, your options for shelter are limited.
+[[Okay|Find some shelter]]</tw-passagedata><tw-passagedata pid="39" name="Iterate" tags="iterate" position="809,359" size="100,100">Iterate = blue</tw-passagedata><tw-passagedata pid="40" name="Condition &amp; add variable" tags="condition" position="933,362" size="100,100">Condition = red</tw-passagedata><tw-passagedata pid="41" name="Find some shelter" tags="include" position="1723,569" size="100,100">As it starts to get dark, your options for shelter are limited.
 
 [[An abandoned car]]
 [[Up a tree]]
@@ -648,12 +661,13 @@ It sounds like a lot.
 At some point in the night you hear a noise. 
 
 [[Open the lid &amp; look out|Look out bin]]
-[[Stay still|Stay still bin]]</tw-passagedata><tw-passagedata pid="50" name="Sleep tree" tags="" position="2267,1568" size="100,100">You go to sleep in a nook between 2 branches. 
+[[Stay still|Stay still bin]]</tw-passagedata><tw-passagedata pid="50" name="Sleep tree" tags="decision" position="2267,1568" size="100,100">You go to sleep in a nook between 2 branches. 
 
 ...Until you&#39;re soon woken by some heavy footsteps...
 
 [[Look down|Look at monster]]
-[[Keep still|Keep still in tree]]</tw-passagedata><tw-passagedata pid="51" name="Get in bin" tags="" position="1755,1056" size="100,100">You gag as you climb into the bin. 
+[[Keep still|Keep still in tree]]
+&lt;&lt;set $getSleep to true&gt;&gt;</tw-passagedata><tw-passagedata pid="51" name="Get in bin" tags="" position="1755,1056" size="100,100">You gag as you climb into the bin. 
 
 It smells really bad. 
 
@@ -797,11 +811,11 @@ In the darkness, you can see dead zombies scattered around, some of them torn ap
 
 The heavy footprints fade away. 
 
-[[Sleep in the overturned bin|Sleep in bin][$getSleep to true]]</tw-passagedata><tw-passagedata pid="78" name="End chapter 2" tags="Summary" position="2045,2963" size="100,100">&lt;i class=&quot;action&quot;&gt;End of chapter 2&lt;/i&gt;
+[[Sleep in the upturned bin|Sleep in bin][$getSleep to true]]</tw-passagedata><tw-passagedata pid="78" name="End chapter 2" tags="Summary" position="2045,2963" size="100,100">&lt;i class=&quot;action&quot;&gt;End of chapter 2&lt;/i&gt;
 
 &lt;i class=&quot;summary&quot;&gt;You chose to sleep in the $sleepLocation&lt;/i&gt;
 
-&lt;&lt;if $supermarketItem &gt; 0&gt;&gt;
+&lt;&lt;if $getSleep is true&gt;&gt;
 &lt;i class=&quot;summary&quot;&gt;You got some sleep&lt;/i&gt;
 &lt;&lt;else&gt;&gt;
 &lt;i class=&quot;summary&quot;&gt;You didn&#39;t sleep&lt;/i&gt;
@@ -809,13 +823,13 @@ The heavy footprints fade away.
 
 &lt;i class=&quot;summary&quot;&gt;You didn&#39;t see the large creature&lt;/i&gt;
 
-[[Continue|Chapter 3 link]]</tw-passagedata><tw-passagedata pid="79" name="Sleep in wrecked car" tags="" position="1554,2556" size="100,100">You sleep in the wreckage of the car until it gets light. 
+[[Continue|Chapter 3 link]]</tw-passagedata><tw-passagedata pid="79" name="Sleep in wrecked car" tags="" position="1554,2546" size="100,100">You sleep in the wreckage of the car until it gets light. 
 
 Luckily, there are no more disturbances throughout the night. 
 
 &lt;i class=&quot;action-success&quot;&gt;You are now less tired!&lt;/i&gt;
 
-[[Continue|End chapter 2]] </tw-passagedata><tw-passagedata pid="80" name="Continue on foot C2" tags="" position="1828,2557" size="100,100">You frantically run as far as you can until you get tired.
+[[Continue|End chapter 2]] </tw-passagedata><tw-passagedata pid="80" name="Continue on foot C2" tags="" position="1828,2547" size="100,100">You frantically run as far as you can until you get tired.
 
 But manage to wander through &lt;i class=&quot;wl&quot;&gt;The wasteland&lt;/i&gt; unharmed until the sun rises. 
 
@@ -835,7 +849,7 @@ I was just checking you didn&#39;t have a death wish.
 
 You run away, still clutching the $supermarketItem.
 
-[[Continue|Outside supermarket win]] </tw-passagedata><tw-passagedata pid="83" name="Sleep in bin" tags="" position="2007,2556" size="100,100">You sleep in the upturned bin until it gets light. 
+[[Continue|Outside supermarket win]] </tw-passagedata><tw-passagedata pid="83" name="Sleep in bin" tags="" position="2007,2546" size="100,100">You sleep in the upturned bin until it gets light. 
 
 Luckily, there are no more disturbances throughout the night. 
 
@@ -875,7 +889,7 @@ Something large is stomping around...
 
 &lt;p class=&quot;version&quot;&gt;1.0.1&lt;/p&gt;</tw-passagedata><tw-passagedata pid="90" name="StoryAuthor" tags="" position="102,328" size="100,100">By David Ball
 
-&lt;p class=&quot;version&quot;&gt;v1.0.1&lt;/p&gt;</tw-passagedata><tw-passagedata pid="91" name="Climb down the tree" tags="decision" position="2228,2219" size="100,100">It&#39;s dangerous, but you climb down the tree in the dark. 
+&lt;p class=&quot;version&quot;&gt;v1.0.2&lt;/p&gt;</tw-passagedata><tw-passagedata pid="91" name="Climb down the tree" tags="decision" position="2228,2219" size="100,100">It&#39;s dangerous, but you climb down the tree in the dark. 
 
 You can see dead &amp; dismembered zombies scattered around.
 
@@ -885,7 +899,7 @@ You can see dead &amp; dismembered zombies scattered around.
 The heavy footsteps get quieter as whatever creature that was moves away. 
 
 [[Run away|Run from tree]]
-[[Get some sleep|Sleep tree after monster][$getSleep to true]]</tw-passagedata><tw-passagedata pid="93" name="Sleep tree after monster" tags="" position="2493,2550" size="100,100">You sleep in the tree until a loud crow wakes you in the morning.
+[[Get some sleep|Sleep tree after monster][$getSleep to true]]</tw-passagedata><tw-passagedata pid="93" name="Sleep tree after monster" tags="" position="2493,2540" size="100,100">You sleep in the tree until a loud crow wakes you in the morning.
 
 It&#39;s now light &amp; you can see the carnage around you. 
 
@@ -893,7 +907,7 @@ Dead &amp; dismembered zombies are littered everywhere.
 
 ...plus an upturned car &amp; wheelie bin.
 
-[[Continue|End chapter 2]]</tw-passagedata><tw-passagedata pid="94" name="Run from tree" tags="" position="2252,2551" size="100,100">You frantically run as far as you can until you get tired.
+[[Continue|End chapter 2]]</tw-passagedata><tw-passagedata pid="94" name="Run from tree" tags="" position="2252,2541" size="100,100">You frantically run as far as you can until you get tired.
 
 But manage to wander through &lt;i class=&quot;wl&quot;&gt;The wasteland&lt;/i&gt; unharmed until the sun rises. 
 
@@ -955,11 +969,9 @@ It falls over, but another taller zombie notices you.
 The zombies are getting closer &amp; he&#39;s trapped.
 
 [[Help him|Help man in alley]]
-[[Leave him|Leave alley man sure?]]</tw-passagedata><tw-passagedata pid="107" name="Leave alley man sure?" tags="" position="3350,1436" size="100,100">As you leave, the man sees you.
-
-He calls out &quot;Help me, please!&quot;
-
-He seems panicked. He&#39;s pushing the zombies away, but they&#39;re pinning him against a wall &amp; scratching his skin. 
+[[Leave him|Leave alley man sure?]]</tw-passagedata><tw-passagedata pid="107" name="Leave alley man sure?" tags="" position="3350,1436" size="100,100">&lt;p class=&quot;small&quot;&gt;As you leave, the man sees you.&lt;/p&gt;
+&lt;p class=&quot;small&quot;&gt;He calls out &quot;Help me, please!&quot;&lt;/p&gt;
+&lt;p class=&quot;small&quot;&gt;He seems panicked. He&#39;s pushing the zombies away, but they&#39;re pinning him against a wall &amp; scratching his skin.&lt;/p&gt;
 
 [[Help him|Help man in alley]]
 [[Leave him|Leave alley man]]
@@ -1011,7 +1023,7 @@ Luckily, the stranger pulls you away.
 
 [[Follow stranger|Follow stranger C3]] </tw-passagedata><tw-passagedata pid="117" name="Follow stranger C3" tags="" position="3060,1838" size="100,100">The man takes you to a truck, which is in relatively good condition compared to the wrecked cars you&#39;ve seen lately. 
 
-[[Ask him where he can from|Stranger gives knife]]
+[[Ask him where he came from|Stranger gives knife]]
 [[Ask him why he&#39;s got clean clothes|Stranger gives knife]]
 [[Ask him what he was doing out here|Stranger gives knife]]</tw-passagedata><tw-passagedata pid="118" name="Investigate truck" tags="" position="3457,1805" size="100,100">Inside the truck, you find a knife.
 
@@ -1024,8 +1036,7 @@ Luckily, the stranger pulls you away.
 &lt;p class=&quot;small&quot;&gt;&lt;i class=&quot;action-success&quot;&gt;You now have a knife&lt;/i&gt;&lt;/p&gt;
 
 [[Thank him &amp; wave goodbye|Stranger drives away happy C3]]
-[[Run after him|Stranger drives away C3 too late]]
-[[Attack him with the knife|Stranger drives away C3 too late]]</tw-passagedata><tw-passagedata pid="120" name="Stranger drives away happy C3" tags="" position="2987,2163" size="100,100">You watch as the man drives. 
+[[Run after him|Stranger drives away C3 too late]]</tw-passagedata><tw-passagedata pid="120" name="Stranger drives away happy C3" tags="" position="2987,2163" size="100,100">You watch as the man drives. 
 
 He&#39;s heading North. 
 
@@ -1123,7 +1134,7 @@ Ahead, you see a small town.
 [[Examine the riverbed]]
 </tw-passagedata><tw-passagedata pid="136" name="Walk to town C4" tags="" position="3756,805" size="100,100">Dust blows into your eyes as you cross the bridge into the town.
 
-This used to be a bustling market town, now it&#39;s desserted &amp; partially destroyed. 
+This used to be a bustling market town, now it&#39;s deserted &amp; partially destroyed. 
 
 [[Look at street]]
 [[Look at buildings]]</tw-passagedata><tw-passagedata pid="137" name="Examine the riverbed" tags="" position="3893,597" size="100,100">The river looks like it&#39;s been dry for a few years. 
@@ -1154,12 +1165,13 @@ It absolutely stinks.
 
 A swarm of insects fly from a rotting piece of ham. 
 
-[[Look closer|Get drink bottle]]</tw-passagedata><tw-passagedata pid="142" name="Check the cash register" tags="" position="4150,1790" size="100,100">You check the cash register. 
+[[Check top shelf|Get drink bottle]]
+[[Check bottom shelf|Get drink bottle]]</tw-passagedata><tw-passagedata pid="142" name="Check the cash register" tags="" position="4150,1790" size="100,100">You check the cash register. 
 
 It&#39;s full of money, there must be like a week&#39;s wages in here! 
 
 [[Take the money]]
-[[Check the refridgerator]] </tw-passagedata><tw-passagedata pid="143" name="Get drink bottle" tags="" position="4117,2229" size="100,100">You find a bottle of cranberry juice
+[[Check the refridgerator]] </tw-passagedata><tw-passagedata pid="143" name="Get drink bottle" tags="" position="4117,2229" size="100,100">You find a bottle of cranberry juice.
 
 &lt;i class=&quot;action-success&quot;&gt;You found something to drink!&lt;/i&gt;
 
@@ -1173,11 +1185,9 @@ Money has been useless ever since &lt;i class=&quot;te&quot;&gt;The Event&lt;/i&
 
 The world hasn&#39;t been the same since.
 
-[[Check the refridgerator]] </tw-passagedata><tw-passagedata pid="146" name="Drink the cranberry juice" tags="" position="4019,2375" size="100,100">You open the bottle &amp; manage to take a sip before you&#39;re distracted...
-
-A lady rushes into the shop through the open door.
-
-She&#39;s covered with sweat &amp; is wearing a dirty winter jacket.
+[[Check the refridgerator]] </tw-passagedata><tw-passagedata pid="146" name="Drink the cranberry juice" tags="" position="4019,2375" size="100,100">&lt;p class=&quot;small&quot;&gt;You manage to take a sip before you&#39;re distracted...&lt;/p&gt;
+&lt;p class=&quot;small&quot;&gt;A lady rushes into the shop through the open door.&lt;/p&gt;
+&lt;p class=&quot;small&quot;&gt;She&#39;s covered with sweat &amp; is wearing a dirty winter jacket.&lt;/p&gt;
 
 [[Say hello|Greet woman C4]]
 [[Hide|Hide C4]]
@@ -1240,12 +1250,12 @@ She shows you a zombie bite.
 She starts to cry. 
 
 [[Leave her|Leave lady C4]]
-[[Comfort her|Comfort lady C4]]</tw-passagedata><tw-passagedata pid="158" name="Chapter 4 summary" tags="Summary" position="4094,4271" size="100,100">&lt;i class=&quot;action&quot;&gt;End of chapter 5&lt;/i&gt;
+[[Comfort her|Comfort lady C4]]</tw-passagedata><tw-passagedata pid="158" name="Chapter 4 summary" tags="Summary" position="4094,4271" size="100,100">&lt;i class=&quot;action&quot;&gt;End of chapter 4&lt;/i&gt;
 
 &lt;&lt;if $threatenLady == false&gt;&gt;
 &lt;i class=&quot;summary&quot;&gt;You made the lady trust you&lt;/i&gt;
 &lt;&lt;else&gt;&gt;
-&lt;i class=&quot;summary&quot;&gt;You threatened the lady&lt;/i&gt;
+&lt;i class=&quot;summary&quot;&gt;You made the lady feel scared&lt;/i&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;if $threatenLady == false&gt;&gt;
 &lt;i class=&quot;summary&quot;&gt;You shared your juice&lt;/i&gt;
@@ -1254,11 +1264,13 @@ She starts to cry.
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;if $killedLady == true&gt;&gt;
 &lt;i class=&quot;summary&quot;&gt;You killed the lady before she turned into a zombie&lt;/i&gt;
+
+&lt;i class=&quot;summary&quot;&gt;The lady mentioned a safehouse&lt;/i&gt;
 &lt;&lt;else&gt;&gt;
 &lt;i class=&quot;summary&quot;&gt;You let the lady turn into a zombie&lt;/i&gt;
-&lt;&lt;/if&gt;&gt;
 
-&lt;i class=&quot;&quot;&gt;The lady mentioned a safehouse to the north&lt;/i&gt;
+&lt;i class=&quot;summary&quot;&gt;The lady mentioned a safehouse to the north&lt;/i&gt;
+&lt;&lt;/if&gt;&gt;
 
 [[Continue|Chapter 5 link]]</tw-passagedata><tw-passagedata pid="159" name="Chapter 5 link" tags="" position="4094,4420" size="100,100">&lt;&lt;include &quot;Temporary ending&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="160" name="After drinking" tags="" position="4171,3187" size="100,100">After you both drink, the lady rolls up her sleeve.
 
@@ -1313,7 +1325,7 @@ She stands bolt upright &amp; very quickly puts her hands around your throat.
 
 You&#39;ve seen ill people turn very quickly into zombies. 
 
-You stab her in the head just as she&#39;s about to speak. 
+You stab her in the head just as she was about to tell you something important. 
 
 Her dead body slumps to the floor. 
 
@@ -1328,7 +1340,7 @@ She looks really ill, she&#39;s about to turn into a zombie very soon.
 She slumps to the floor. 
 
 [[Continue|Wait in cafe]]
-&lt;&lt;set $killedLady to true&gt;&gt;</tw-passagedata><tw-passagedata pid="170" name="Wait in cafe" tags="" position="3948,4147" size="100,100">You wipe your knife clean, &amp; wait for the zombies outside to pass. 
+&lt;&lt;set $killedLady to true&gt;&gt;</tw-passagedata><tw-passagedata pid="170" name="Wait in cafe" tags="" position="3948,4147" size="100,100">You wipe the blood off your knife, &amp; wait for the zombies outside to pass. 
 
 &lt;&lt;if $drankJuice == false&gt;&gt;
 You drink the juice all by yourself.
@@ -1349,7 +1361,7 @@ It slumps to the floor.
 [[Talk to the lady|Comfort lady C4]]
 [[Kill the lady|Prepare to kill lady]]
 &lt;&lt;set $drankJuice == true&gt;&gt;</tw-passagedata><tw-passagedata pid="174" name="Chapter 5" tags="Chapter-start" position="4750,199" size="100,100">&lt;h2&gt;Chapter 5&lt;/h2&gt;
-&lt;h3&gt;??????&lt;/h3&gt;
+&lt;h3&gt;Supplies&lt;/h3&gt;
 [[Continue|Start chapter 5]]</tw-passagedata><tw-passagedata pid="175" name="Start chapter 5" tags="" position="4766,349" size="100,100">In the town, you notice one of the buildings has been barricaded to keep the zombies out.
 
 [[See what&#39;s inside|Go inside barricade]]
@@ -1368,15 +1380,38 @@ The man must have dropped it.
 [[Make noise to attract any zombies]]</tw-passagedata><tw-passagedata pid="178" name="Sneak quietly" tags="" position="4718,694" size="100,100">You enter a room where you see a zombie hanging by its neck from the ceiling by a rope.
 
 [[Look around|Investigate barricaded room]]
-[[Kill the zombie|Try kill hanging zombie]]
-
-</tw-passagedata><tw-passagedata pid="179" name="Make noise to attract any zombies" tags="" position="4873,629" size="100,100">You knock on the wall &amp; hear a zombie growl further inside the building.
+[[Kill the zombie|Try kill hanging zombie]]</tw-passagedata><tw-passagedata pid="179" name="Make noise to attract any zombies" tags="" position="4873,629" size="100,100">You knock on the wall &amp; hear a zombie growl further inside the building.
 
 But you can&#39;t see it yet.
 
 [[Walk down the corridor|Sneak quietly]]</tw-passagedata><tw-passagedata pid="180" name="Investigate barricaded room" tags="" position="4643,892" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="181" name="Try kill hanging zombie" tags="" position="4793,821" size="100,100">The zombie to too high. You try stabbing its legs, but that doesn&#39;t kill it. 
 
-[[Look around|Investigate barricaded room]]</tw-passagedata></tw-storydata>
+You just leave it there. 
+
+[[Look around|Investigate barricaded room]]
+[[Pull zombie&#39;s pants down]]</tw-passagedata><tw-passagedata pid="182" name="Pull zombie&#39;s pants down" tags="" position="4809,959" size="100,100">That&#39;s gross
+
+[[Look around|Investigate barricaded room]]</tw-passagedata><tw-passagedata pid="183" name="Attack zombie with mop" tags="" position="562,2622" size="100,100">You drive the mop head into the zombie&#39;s face so hard that the handle breaks. 
+
+The zombie is distracted long enough for you to make your escape. 
+
+[[Continue|Outside supermarket fail]] </tw-passagedata><tw-passagedata pid="184" name="Use bleach on zombie" tags="" position="394,2626" size="100,100">You squirt bleach over the zombie&#39;s face. It screams, giving you enough time to make your escape. 
+
+[[Continue|Outside supermarket fail]] </tw-passagedata><tw-passagedata pid="185" name="Search for a weapon 2" tags="" position="477,2506" size="100,100">You look for something to use as a weapon. 
+
+Unfortunately there aren&#39;t many options. 
+
+You see a &lt;i class=&quot;item&quot;&gt;bottle of bleach&lt;/i&gt;, &amp; a &lt;i class=&quot;item&quot;&gt;mop&lt;/i&gt;.
+
+The zombie gets closer.
+
+[[Pickup bleach]]
+[[Pickup mop]]</tw-passagedata><tw-passagedata pid="186" name="Search for food without checking" tags="decision" position="950,2196" size="100,100">You&#39;re so hungry, you don&#39;t bother to check for zombies. 
+
+You find a half eaten &lt;i class=&quot;item&quot;&gt;scotch egg&lt;/i&gt; &amp; a packet of &lt;i class=&quot;item&quot;&gt;rice crispies&lt;/i&gt;.
+
+[[Pickup scotch egg|Zombie attack][$supermarketItem to &quot;scotch egg&quot;]]
+[[Pickup packet of Rice Crispies|Zombie attack][$supermarketItem to &quot;rice crispies&quot;]]</tw-passagedata><tw-passagedata pid="187" name="Decision" tags="decision" position="807,475" size="100,100">green</tw-passagedata><tw-passagedata pid="188" name="Include" tags="include" position="936,475" size="100,100">yellow</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
 	if(document.documentElement.getAttribute("data-init")==="loading"){!function(window,document,jQuery,undefined){"use strict";function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,r=Array(e.length);t<e.length;t++)r[t]=e[t];return r}return Array.from(e)}var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_slicedToArray=function(){function e(e,t){var r=[],n=!0,a=!1,i=undefined;try{for(var o,s=e[Symbol.iterator]();!(n=(o=s.next()).done)&&(r.push(o.value),!t||r.length!==t);n=!0);}catch(e){a=!0,i=e}finally{try{!n&&s.return&&s.return()}finally{if(a)throw i}}return r}return function(t,r){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,r);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},errorPrologRegExp=/^(?:(?:uncaught\s+(?:exception:\s+)?)?\w*(?:error|exception|_err):\s+)+/i,Alert=function(){function e(e,t,r,n){var a="fatal"===e,i="Apologies! "+(a?"A fatal":"An")+" error has occurred.";i+=a?" Aborting.":" You may be able to continue, but some parts may not work properly.",null==t&&null==r||(i+="\n\nError",null!=t&&(i+=" ["+t+"]"),i+=null!=r?": "+r.replace(errorPrologRegExp,"")+".":": unknown error."),"object"===(void 0===n?"undefined":_typeof(n))&&n.stack&&(i+="\n\nStack Trace:\n"+n.stack),window.alert(i)}function t(t,r,n){e(null,t,r,n)}function r(t,r,n){e("fatal",t,r,n)}return function(e){window.onerror=function(n,a,i,o,s){"complete"===document.readyState?t(null,n,s):(r(null,n,s),window.onerror=e,"function"==typeof window.onerror&&window.onerror.apply(this,arguments))}}(window.onerror),Object.freeze(Object.defineProperties({},{error:{value:t},fatal:{value:r}}))}(),Patterns=function(){var e=function(){var e=new Map([[" ","\\u0020"],["\f","\\f"],["\n","\\n"],["\r","\\r"],["\t","\\t"],["\v","\\v"],[" ","\\u00a0"],[" ","\\u1680"],["᠎","\\u180e"],[" ","\\u2000"],[" ","\\u2001"],[" ","\\u2002"],[" ","\\u2003"],[" ","\\u2004"],[" ","\\u2005"],[" ","\\u2006"],[" ","\\u2007"],[" ","\\u2008"],[" ","\\u2009"],[" ","\\u200a"],["\u2028","\\u2028"],["\u2029","\\u2029"],[" ","\\u202f"],[" ","\\u205f"],["　","\\u3000"],["\ufeff","\\ufeff"]]),t=/^\s$/,r="";return e.forEach(function(e,n){t.test(n)||(r+=e)}),r?"[\\s"+r+"]":"\\s"}(),t="\\s"===e?"\\S":e.replace(/^\[/,"[^"),r="[0-9A-Z_a-z\\-\\u00c0-\\u00d6\\u00d8-\\u00f6\\u00f8-\\u00ff\\u0150\\u0170\\u0151\\u0171]",n=r.replace("\\-",""),a=function(){return"("+r+"+)\\(([^\\)\\|\\n]+)\\):|("+r+"+):([^;\\|\\n]+);|((?:\\."+r+"+)+);|((?:#"+r+"+)+);"}();return Object.freeze({space:e,spaceNoTerminator:"[\\u0020\\f\\t\\v\\u00a0\\u1680\\u180e\\u2000-\\u200a\\u202f\\u205f\\u3000\\ufeff]",lineTerminator:"[\\n\\r\\u2028\\u2029]",notSpace:t,anyChar:"(?:.|[\\n\\r\\u2028\\u2029])",anyLetter:r,anyLetterStrict:n,identifierFirstChar:"[$A-Z_a-z]",identifierNextChar:"[$0-9A-Z_a-z]",identifier:"[$A-Z_a-z][$0-9A-Z_a-z]*",variableSigil:"[$_]",variable:"[$_][$A-Z_a-z][$0-9A-Z_a-z]*",macroName:"[A-Za-z][\\w-]*|[=-]",templateName:"[A-Za-z][\\w-]*",cssImage:"\\[[<>]?[Ii][Mm][Gg]\\[(?:\\s|\\S)*?\\]\\]+",inlineCss:a,url:"(?:file|https?|mailto|ftp|javascript|irc|news|data):[^\\s'\"]+"})}();!function(){!function(e){if(e&&e.prototype&&null==e.prototype.firstElementChild){var t=Node.ELEMENT_NODE;Object.defineProperty(e.prototype,"firstElementChild",{get:function(){for(var e=this.childNodes,r=0;r<e.length;++r){var n=e[r];if(n.nodeType===t)return n}return null}})}}(window.Node||window.Element)}(),function(){function e(e,t){var r=Number.parseInt(e,10)||0;if(r<1)return"";var n=void 0===t?"":String(t);for(""===n&&(n=" ");n.length<r;){var a=n.length,i=r-a;n+=a>i?n.slice(0,i):n}return n.length>r&&(n=n.slice(0,r)),n}var t=function(){function e(e,n){var a=String(e);if(!a)return a;switch(n){case"start":return t.test(a)?a.replace(t,""):a;case"end":return r.test(a)?a.replace(r,""):a;default:throw new Error('_trimString called with incorrect where parameter value: "'+n+'"')}}var t=new RegExp("^"+Patterns.space+Patterns.space+"*"),r=new RegExp(""+Patterns.space+Patterns.space+"*$");return e}();Array.prototype.flat||Object.defineProperty(Array.prototype,"flat",{configurable:!0,writable:!0,value:function(){function e(){if(null==this)throw new TypeError("Array.prototype.flat called on null or undefined");var t=0===arguments.length?1:Number(arguments[0])||0;return t<1?Array.prototype.slice.call(this):Array.prototype.reduce.call(this,function(r,n){return n instanceof Array?r.push.apply(r,_toConsumableArray(e.call(n,t-1))):r.push(n),r},[])}return e}()}),Array.prototype.flatMap||Object.defineProperty(Array.prototype,"flatMap",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatMap called on null or undefined");return Array.prototype.map.apply(this,arguments).flat()}}),Array.prototype.includes||Object.defineProperty(Array.prototype,"includes",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includes called on null or undefined");if(0===arguments.length)return!1;var e=this.length>>>0;if(0===e)return!1;var t=arguments[0],r=Number(arguments[1])||0;for(r<0&&(r=Math.max(0,e+r));r<e;++r){var n=this[r];if(n===t||n!==n&&t!==t)return!0}return!1}}),Object.entries||Object.defineProperty(Object,"entries",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.entries object parameter must be an object");return Object.keys(e).map(function(t){return[t,e[t]]})}}),Object.fromEntries||Object.defineProperty(Object,"fromEntries",{configurable:!0,writable:!0,value:function(e){return Array.from(e).reduce(function(e,t){if(Object(t)!==t)throw new TypeError("Object.fromEntries iterable parameter must yield objects");return t[0]in e?Object.defineProperty(e,t[0],{configurable:!0,enumerable:!0,writable:!0,value:t[1]}):e[t[0]]=t[1],e},{})}}),Object.getOwnPropertyDescriptors||Object.defineProperty(Object,"getOwnPropertyDescriptors",{configurable:!0,writable:!0,value:function(e){if(null==e)throw new TypeError("Object.getOwnPropertyDescriptors object parameter is null or undefined");var t=Object(e);return Reflect.ownKeys(t).reduce(function(e,r){var n=Object.getOwnPropertyDescriptor(t,r);return void 0!==n&&(r in e?Object.defineProperty(e,r,{configurable:!0,enumerable:!0,writable:!0,value:n}):e[r]=n),e},{})}}),Object.values||Object.defineProperty(Object,"values",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.values object parameter must be an object");return Object.keys(e).map(function(t){return e[t]})}}),String.prototype.padStart||Object.defineProperty(String.prototype,"padStart",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padStart called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:e(i-a,r)+n}}),String.prototype.padEnd||Object.defineProperty(String.prototype,"padEnd",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padEnd called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:n+e(i-a,r)}}),String.prototype.trimStart||Object.defineProperty(String.prototype,"trimStart",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimStart called on null or undefined");return t(this,"start")}}),String.prototype.trimLeft||Object.defineProperty(String.prototype,"trimLeft",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimLeft called on null or undefined");return t(this,"start")}}),String.prototype.trimEnd||Object.defineProperty(String.prototype,"trimEnd",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimEnd called on null or undefined");return t(this,"end")}}),String.prototype.trimRight||Object.defineProperty(String.prototype,"trimRight",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimRight called on null or undefined");return t(this,"end")}})}(),function(){function _random(){var e=void 0,t=void 0;switch(arguments.length){case 0:throw new Error("_random called with insufficient parameters");case 1:e=0,t=arguments[0];break;default:e=arguments[0],t=arguments[1]}if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.floor(_nativeMathRandom()*(t-e+1))+e}function _randomIndex(e,t){var r=void 0,n=void 0;switch(t.length){case 1:r=0,n=e-1;break;case 2:r=0,n=Math.trunc(t[1]);break;default:r=Math.trunc(t[1]),n=Math.trunc(t[2])}return Number.isNaN(r)?r=0:!Number.isFinite(r)||r>=e?r=e-1:r<0&&(r=e+r)<0&&(r=0),Number.isNaN(n)?n=0:!Number.isFinite(n)||n>=e?n=e-1:n<0&&(n=e+n)<0&&(n=e-1),_random(r,n)}function _getCodePointStartAndEnd(e,t){var r=e.charCodeAt(t);if(Number.isNaN(r))return{char:"",start:-1,end:-1};if(r<55296||r>57343)return{char:e.charAt(t),start:t,end:t};if(r>=55296&&r<=56319){var n=t+1;if(n>=e.length)throw new Error("high surrogate without trailing low surrogate");var a=e.charCodeAt(n);if(a<56320||a>57343)throw new Error("high surrogate without trailing low surrogate");return{char:e.charAt(t)+e.charAt(n),start:t,end:n}}if(0===t)throw new Error("low surrogate without leading high surrogate");var i=t-1,o=e.charCodeAt(i);if(o<55296||o>56319)throw new Error("low surrogate without leading high surrogate");return{char:e.charAt(i)+e.charAt(t),start:i,end:t}}var _nativeMathRandom=Math.random;Object.defineProperty(Array,"random",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e||!Object.prototype.hasOwnProperty.call(e,"length"))throw new TypeError("Array.random array parameter must be an array or array-lke object");var t=e.length>>>0;if(0!==t){return e[0===arguments.length?_random(0,t-1):_randomIndex(t,Array.prototype.slice.call(arguments,1))]}}}),Object.defineProperty(Array.prototype,"concatUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.concatUnique called on null or undefined");var e=Array.from(this);if(0===arguments.length)return e;var t=Array.prototype.reduce.call(arguments,function(e,t){return e.concat(t)},[]),r=t.length;if(0===r)return e;for(var n=Array.prototype.indexOf,a=Array.prototype.push,i=0;i<r;++i){var o=t[i];-1===n.call(e,o)&&a.call(e,o)}return e}}),Object.defineProperty(Array.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.count called on null or undefined");for(var e=Array.prototype.indexOf,t=arguments[0],r=Number(arguments[1])||0,n=0;-1!==(r=e.call(this,t,r));)++n,++r;return n}}),Object.defineProperty(Array.prototype,"delete",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.delete called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.concat.apply([],arguments),r=t.length,n=[],a=0;a<e;++a)for(var i=this[a],o=0;o<r;++o){var s=t[o];if(i===s||i!==i&&s!==s){n.push(a);break}}for(var u=[],l=0,c=n.length;l<c;++l)u[l]=this[n[l]];for(var d=Array.prototype.splice,f=n.length-1;f>=0;--f)d.call(this,n[f],1);return u}}),Object.defineProperty(Array.prototype,"deleteAt",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.deleteAt called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.splice,r=[].concat(_toConsumableArray(new Set(Array.prototype.concat.apply([],arguments).map(function(t){return t<0?Math.max(0,e+t):t})).values())),n=[].concat(_toConsumableArray(r)).sort(function(e,t){return t-e}),a=[],i=0,o=r.length;i<o;++i)a[i]=this[r[i]];for(var s=0,u=n.length;s<u;++s)t.call(this,n[s],1);return a}}),Object.defineProperty(Array.prototype,"deleteWith",{configurable:!0,writable:!0,value:function(e,t){if(null==this)throw new TypeError("Array.prototype.deleteWith called on null or undefined");if("function"!=typeof e)throw new Error("Array.prototype.deleteWith predicate parameter must be a function");var r=this.length>>>0;if(0===r)return[];for(var n=Array.prototype.splice,a=[],i=[],o=0;o<r;++o)e.call(t,this[o],o,this)&&(i.push(this[o]),a.push(o));for(var s=a.length-1;s>=0;--s)n.call(this,a[s],1);return i}}),Object.defineProperty(Array.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.first called on null or undefined");if(0!=this.length>>>0)return this[0]}}),Object.defineProperty(Array.prototype,"includesAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAll called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAll.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(!Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!1;return!0}}),Object.defineProperty(Array.prototype,"includesAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAny called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAny.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!0;return!1}}),Object.defineProperty(Array.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.last called on null or undefined");var e=this.length>>>0;if(0!==e)return this[e-1]}}),Object.defineProperty(Array.prototype,"pluck",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pluck called on null or undefined");var e=this.length>>>0;if(0!==e){var t=0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)));return Array.prototype.splice.call(this,t,1)[0]}}}),Object.defineProperty(Array.prototype,"pluckMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.pluckMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.pluckMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=Array.prototype.splice,a=[],i=t-1;do{a.push(n.call(this,_random(0,i--),1)[0])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"pushUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pushUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.push,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Array.prototype,"random",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.random called on null or undefined");var e=this.length>>>0;if(0!==e){return this[0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)))]}}}),Object.defineProperty(Array.prototype,"randomMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.randomMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.randomMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=new Map,a=[],i=t-1;do{var o=void 0;do{o=_random(0,i)}while(n.has(o));n.set(o,!0),a.push(this[o])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"shuffle",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.shuffle called on null or undefined");var e=this.length>>>0;if(0===e)return this;for(var t=e-1;t>0;--t){var r=Math.floor(_nativeMathRandom()*(t+1));if(t!==r){var n=this[t];this[t]=this[r],this[r]=n}}return this}}),Object.defineProperty(Array.prototype,"unshiftUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.unshiftUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.unshift,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Function.prototype,"partial",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Function.prototype.partial called on null or undefined");var e=Array.prototype.slice,t=this,r=e.call(arguments,0);return function(){for(var n=[],a=0,i=0;i<r.length;++i)n.push(r[i]===undefined?arguments[a++]:r[i]);return t.apply(this,n.concat(e.call(arguments,a)))}}}),Object.defineProperty(Math,"clamp",{configurable:!0,writable:!0,value:function(e,t,r){var n=Number(e);return Number.isNaN(n)?NaN:n.clamp(t,r)}}),Object.defineProperty(Math,"easeInOut",{configurable:!0,writable:!0,value:function(e){return 1-(Math.cos(Number(e)*Math.PI)+1)/2}}),Object.defineProperty(Number.prototype,"clamp",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Number.prototype.clamp called on null or undefined");if(2!==arguments.length)throw new Error("Number.prototype.clamp called with an incorrect number of parameters");var e=Number(arguments[0]),t=Number(arguments[1]);if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.min(Math.max(this,e),t)}}),RegExp.escape||function(){var e=/[\\^$*+?.()|[\]{}]/g,t=new RegExp(e.source);Object.defineProperty(RegExp,"escape",{configurable:!0,writable:!0,value:function(r){var n=String(r);return n&&t.test(n)?n.replace(e,"\\$&"):n}})}(),function(){var e=/{(\d+)(?:,([+-]?\d+))?}/g,t=new RegExp(e.source);Object.defineProperty(String,"format",{configurable:!0,writable:!0,value:function(r){function n(e,t,r){if(!t)return e;var n=Math.abs(t)-e.length;if(n<1)return e;var a=String(r).repeat(n);return t<0?e+a:a+e}if(arguments.length<2)return 0===arguments.length?"":r;var a=2===arguments.length&&Array.isArray(arguments[1])?[].concat(_toConsumableArray(arguments[1])):Array.prototype.slice.call(arguments,1);return 0===a.length?r:t.test(r)?(e.lastIndex=0,r.replace(e,function(e,t,r){var i=a[t];if(null==i)return"";for(;"function"==typeof i;)i=i();switch(void 0===i?"undefined":_typeof(i)){case"string":break;case"object":i=JSON.stringify(i);break;default:i=String(i)}return n(i,r?Number.parseInt(r,10):0," ")})):r}})}(),Object.defineProperty(String.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.contains called on null or undefined");return-1!==String.prototype.indexOf.apply(this,arguments)}}),Object.defineProperty(String.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.count called on null or undefined");var e=String(arguments[0]||"");if(""===e)return 0;for(var t=String.prototype.indexOf,r=e.length,n=Number(arguments[1])||0,a=0;-1!==(n=t.call(this,e,n));)++a,n+=r;return a}}),Object.defineProperty(String.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.first called on null or undefined");return _getCodePointStartAndEnd(String(this),0).char}}),Object.defineProperty(String.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.last called on null or undefined");var e=String(this);return _getCodePointStartAndEnd(e,e.length-1).char}}),Object.defineProperty(String.prototype,"splice",{configurable:!0,writable:!0,value:function(e,t,r){if(null==this)throw new TypeError("String.prototype.splice called on null or undefined");var n=this.length>>>0;if(0===n)return"";var a=Number(e);Number.isSafeInteger(a)?a<0&&(a+=n)<0&&(a=0):a=0,a>n&&(a=n);var i=Number(t);(!Number.isSafeInteger(i)||i<0)&&(i=0);var o=this.slice(0,a);return void 0!==r&&(o+=r),a+i<n&&(o+=this.slice(a+i)),o}}),Object.defineProperty(String.prototype,"splitOrEmpty",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.splitOrEmpty called on null or undefined");return""===String(this)?[]:String.prototype.split.apply(this,arguments)}}),Object.defineProperty(String.prototype,"toLocaleUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toLocaleUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toLocaleUpperCase()+e.slice(n+1)}}),Object.defineProperty(String.prototype,"toUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toUpperCase()+e.slice(n+1)}}),Object.defineProperty(Date.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:date)",this.toISOString()]}}),Object.defineProperty(Function.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)","("+this.toString()+")"]}}),Object.defineProperty(Map.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:map)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(RegExp.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)",this.toString()]}}),Object.defineProperty(Set.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:set)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(JSON,"reviveWrapper",{configurable:!0,writable:!0,value:function(e,t){if("string"!=typeof e)throw new TypeError("JSON.reviveWrapper code parameter must be a string");return["(revive:eval)",[e,t]]}}),Object.defineProperty(JSON,"_real_parse",{value:JSON.parse}),Object.defineProperty(JSON,"parse",{configurable:!0,writable:!0,value:function value(text,reviver){return JSON._real_parse(text,function(key,val){var value=val;if(Array.isArray(value)&&2===value.length)switch(value[0]){case"(revive:set)":value=new Set(value[1]);break;case"(revive:map)":value=new Map(value[1]);break;case"(revive:date)":value=new Date(value[1]);break;case"(revive:eval)":try{if(Array.isArray(value[1])){var $ReviveData$=value[1][1];value=eval(value[1][0])}else value=eval(value[1])}catch(e){}}else if("string"==typeof value&&"@@revive@@"===value.slice(0,10))try{value=eval(value.slice(10))}catch(e){}if("function"==typeof reviver)try{value=reviver(key,value)}catch(e){}return value})}}),Object.defineProperty(Array.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.contains called on null or undefined");return Array.prototype.includes.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAll called on null or undefined");return Array.prototype.includesAll.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAny called on null or undefined");return Array.prototype.includesAny.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"flatten",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatten called on null or undefined");return Array.prototype.flat.call(this,1/0)}}),Object.defineProperty(String.prototype,"readBracketedList",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.readBracketedList called on null or undefined");for(var e=new RegExp("(?:\\[\\[((?:\\s|\\S)*?)\\]\\])|([^\"'\\s]\\S*)","gm"),t=[],r=void 0;null!==(r=e.exec(this));)r[1]?t.push(r[1]):r[2]&&t.push(r[2]);return t}})}();var Browser=function(){var e=navigator.userAgent.toLowerCase(),t=e.includes("windows phone"),r=Object.freeze({Android:!t&&e.includes("android"),BlackBerry:/blackberry|bb10/.test(e),iOS:!t&&/ip(?:hone|ad|od)/.test(e),Opera:!t&&("object"===_typeof(window.operamini)||e.includes("opera mini")),Windows:t||/iemobile|wpdesktop/.test(e),any:function(){return r.Android||r.BlackBerry||r.iOS||r.Opera||r.Windows}}),n=!r.Windows&&!/khtml|trident|edge/.test(e)&&e.includes("gecko"),a=!e.includes("opera")&&/msie|trident/.test(e),i=a?function(){var t=/(?:msie\s+|rv:)(\d+\.\d)/.exec(e);return t?Number(t[1]):0}():null,o=e.includes("opera")||e.includes(" opr/"),s=o?function(){var t=new RegExp((/khtml|chrome/.test(e)?"opr":"version")+"\\/(\\d+\\.\\d+)"),r=t.exec(e);return r?Number(r[1]):0}():null,u=e.includes("vivaldi");return Object.freeze({userAgent:e,isMobile:r,isGecko:n,isIE:a,ieVersion:i,isOpera:o,operaVersion:s,isVivaldi:u})}(),Has=function(){var e=function(){try{return"function"==typeof document.createElement("audio").canPlayType}catch(e){}return!1}(),t=e&&function(){try{var e=document.createElement("audio").play();return e.catch(function(){}),e instanceof Promise}catch(e){}return!1}(),r=function(){try{return"Blob"in window&&"File"in window&&"FileList"in window&&"FileReader"in window&&!Browser.isMobile.any()&&(!Browser.isOpera||Browser.operaVersion>=15)}catch(e){}return!1}(),n=function(){try{return"geolocation"in navigator&&"function"==typeof navigator.geolocation.getCurrentPosition&&"function"==typeof navigator.geolocation.watchPosition}catch(e){}return!1}(),a=function(){try{return"MutationObserver"in window&&"function"==typeof window.MutationObserver}catch(e){}return!1}(),i=function(){try{return"performance"in window&&"function"==typeof window.performance.now}catch(e){}return!1}(),o=function(){try{return"ontouchstart"in window||!!window.DocumentTouch&&document instanceof window.DocumentTouch||!!navigator.maxTouchPoints||!!navigator.msMaxTouchPoints}catch(e){}return!1}(),s=function(){try{for(var e=new Map([["transition","transitionend"],["MSTransition","msTransitionEnd"],["WebkitTransition","webkitTransitionEnd"],["MozTransition","transitionend"]]),t=[].concat(_toConsumableArray(e.keys())),r=document.createElement("div"),n=0;n<t.length;++n)if(r.style[t[n]]!==undefined)return e.get(t[n])}catch(e){}return!1}();return Object.freeze({audio:e,audioPromise:t,fileAPI:r,geolocation:n,mutationObserver:a,performance:i,touch:o,transitionEndEvent:s})}(),Visibility=function(){function e(){return Boolean(r&&document[r.hiddenProperty])}function t(){return r&&document[r.stateProperty]||"visible"}var r=function(){try{return Object.freeze([{hiddenProperty:"hidden",stateProperty:"visibilityState",changeEvent:"visibilitychange"},{hiddenProperty:"webkitHidden",stateProperty:"webkitVisibilityState",changeEvent:"webkitvisibilitychange"},{hiddenProperty:"mozHidden",stateProperty:"mozVisibilityState",changeEvent:"mozvisibilitychange"},{hiddenProperty:"msHidden",stateProperty:"msVisibilityState",changeEvent:"msvisibilitychange"}].find(function(e){return e.hiddenProperty in document}))}catch(e){}return null}();return Object.freeze(Object.defineProperties({},{isHidden:{value:e},state:{value:t},hiddenProperty:{value:r.hiddenProperty},stateProperty:{value:r.stateProperty},changeEvent:{value:r.changeEvent}}))}(),_ref3=function(){function e(t){if("object"!==(void 0===t?"undefined":_typeof(t))||null===t)return t;if(t instanceof String)return String(t);if(t instanceof Number)return Number(t);if(t instanceof Boolean)return Boolean(t);if("function"==typeof t.clone)return t.clone(!0);if(t.nodeType&&"function"==typeof t.cloneNode)return t.cloneNode(!0);var r=void 0;return t instanceof Array?r=new Array(t.length):t instanceof Date?r=new Date(t.getTime()):t instanceof Map?(r=new Map,t.forEach(function(t,n){return r.set(n,e(t))})):t instanceof RegExp?r=new RegExp(t):t instanceof Set?(r=new Set,t.forEach(function(t){return r.add(e(t))})):r=Object.create(Object.getPrototypeOf(t)),Object.keys(t).forEach(function(n){return r[n]=e(t[n])}),r}function t(e){for(var t=document.createDocumentFragment(),r=document.createElement("p"),n=void 0;null!==(n=e.firstChild);){if(n.nodeType===Node.ELEMENT_NODE){switch(n.nodeName.toUpperCase()){case"BR":if(null!==n.nextSibling&&n.nextSibling.nodeType===Node.ELEMENT_NODE&&"BR"===n.nextSibling.nodeName.toUpperCase()){e.removeChild(n.nextSibling),e.removeChild(n),t.appendChild(r),r=document.createElement("p");continue}if(!r.hasChildNodes()){e.removeChild(n);continue}break;case"ADDRESS":case"ARTICLE":case"ASIDE":case"BLOCKQUOTE":case"CENTER":case"DIV":case"DL":case"FIGURE":case"FOOTER":case"FORM":case"H1":case"H2":case"H3":case"H4":case"H5":case"H6":case"HEADER":case"HR":case"MAIN":case"NAV":case"OL":case"P":case"PRE":case"SECTION":case"TABLE":case"UL":r.hasChildNodes()&&(t.appendChild(r),r=document.createElement("p")),t.appendChild(n);continue}}r.appendChild(n)}r.hasChildNodes()&&t.appendChild(r),e.appendChild(t)}function r(){try{return document.activeElement||null}catch(e){return null}}function n(e,t,r){var n="object"===(void 0===e?"undefined":_typeof(e))?e:document.getElementById(e);if(null==n)return null;var a=Array.isArray(t)?t:[t];jQuery(n).empty();for(var i=0,o=a.length;i<o;++i)if(Story.has(a[i]))return new Wikifier(n,Story.get(a[i]).processText().trim()),n;if(null!=r){var s=String(r).trim();""!==s&&new Wikifier(n,s)}return n}function a(e,t,r){var n=jQuery(document.createElement("div")),a=jQuery(document.createElement("button")),i=jQuery(document.createElement("pre")),o=L10n.get("errorTitle")+": "+(t||"unknown error");return a.addClass("error-toggle").ariaClick({label:L10n.get("errorToggle")},function(){a.hasClass("enabled")?(a.removeClass("enabled"),i.attr({"aria-hidden":!0,hidden:"hidden"})):(a.addClass("enabled"),i.removeAttr("aria-hidden hidden"))}).appendTo(n),jQuery(document.createElement("span")).addClass("error").text(o).appendTo(n),jQuery(document.createElement("code")).text(r).appendTo(i),i.addClass("error-source").attr({"aria-hidden":!0,hidden:"hidden"}).appendTo(n),n.addClass("error-view").appendTo(e),console.warn(o+"\n\t"+r.replace(/\n/g,"\n\t")),!1}function i(e,t){var r=i;switch(void 0===e?"undefined":_typeof(e)){case"number":if(Number.isNaN(e))return t;break;case"object":if(null===e)return t;if(Array.isArray(e))return e.map(function(e){return r(e,t)}).join(", ");if(e instanceof Set)return[].concat(_toConsumableArray(e)).map(function(e){return r(e,t)}).join(", ");if(e instanceof Map){return"{ "+[].concat(_toConsumableArray(e)).map(function(e){var n=_slicedToArray(e,2),a=n[0],i=n[1];return r(a,t)+" → "+r(i,t)}).join(", ")+" }"}return e instanceof Date?e.toLocaleString():"function"==typeof e.toString?e.toString():Object.prototype.toString.call(e);case"function":case"undefined":return t}return String(e)}return Object.freeze(Object.defineProperties({},{clone:{value:e},convertBreaks:{value:t},safeActiveElement:{value:r},setPageElement:{value:n},throwError:{value:a},toStringOrDefault:{value:i}}))
