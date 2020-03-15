@@ -10,3 +10,8 @@ body #passages a:hover {
 	justify-content: center;
 	transform: scale(1.15);
 }
+
+.menu-logo {
+	width: 100%;
+	height: auto;
+}
