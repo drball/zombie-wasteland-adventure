@@ -22,7 +22,7 @@
 	<preference name="android-minSdkVersion" value="21" />
 	<preference name="android-targetSdkVersion" value="28" />
 	<preference name="phonegap-version" value="cli-9.0.0" />
-	<preference name="orientation" value="landscape" />
+	<preference name="orientation" value="portrait" />
 
 	<plugin name="cordova-plugin-whitelist"/>
 	<allow-intent href="http://*/*"/>
