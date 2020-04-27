@@ -1399,10 +1399,12 @@ It slumps to the floor.
 [[Continue|Start chapter 5]]
 &lt;&lt;nobr&gt;&gt;
 &lt;&lt;set $killZombieBaby to false&gt;&gt;
+&lt;&lt;set $stabZombieC5 to false&gt;&gt;
+&lt;&lt;set $cautiousC5 to false&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="174" name="Start chapter 5" tags="" position="4766,349" size="100,100">In the town, you notice one of the buildings has been barricaded to keep the zombies out.
 
 [[See what&#39;s inside|Go inside barricade]]
-
+[[Ignore it|Ignore C5]]
 </tw-passagedata><tw-passagedata pid="175" name="Find knife on floor" tags="" position="3285,1898" size="100,100">You see a knife on the floor.
 
 The man must have dropped it. 
@@ -1414,28 +1416,39 @@ The man must have dropped it.
 ...or maybe the occupant died? 
 
 [[Sneak quietly]]
-[[Make noise to attract any zombies]]</tw-passagedata><tw-passagedata pid="177" name="Sneak quietly" tags="" position="4718,694" size="100,100">You enter a room where you see a zombie hanging by its neck from the ceiling by a rope.
+[[Make noise to attract any zombies]]</tw-passagedata><tw-passagedata pid="177" name="Sneak quietly" tags="decision" position="4718,694" size="100,100">You enter a room where you see a zombie hanging by its neck from the ceiling by a rope.
 
 It absolutely stinks in here.
 
 [[Look around|Investigate barricaded room]]
-[[Kill the zombie|Try kill hanging zombie]]</tw-passagedata><tw-passagedata pid="178" name="Make noise to attract any zombies" tags="" position="4873,629" size="100,100">You knock on the wall &amp; hear a zombie growl further inside the building.
+[[Kill the zombie|Try kill hanging zombie]]
+&lt;&lt;nobr&gt;&gt;
+&lt;&lt;set $cautiousC5 to true&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="178" name="Make noise to attract any zombies" tags="" position="4873,629" size="100,100">You knock on the wall &amp; hear a zombie growl further inside the building.
 
 But you can&#39;t see it yet.
 
 You can smell something horrible though.
 
-[[Walk down the corridor|Sneak quietly]]</tw-passagedata><tw-passagedata pid="179" name="Investigate barricaded room" tags="" position="4643,892" size="100,100">In the room with the hanging zombie, there&#39;s supplies including several food crates 
+[[Walk down the corridor|Sneak quietly]]</tw-passagedata><tw-passagedata pid="179" name="Investigate barricaded room" tags="condition" position="4643,892" size="100,100">In the room with the hanging zombie, there&#39;s supplies including several food crates 
 
 ...and in the other corner is a baby&#39;s cot.
 
 [[Investigate baby&#39;s cot]]
-[[Investigate crates]]</tw-passagedata><tw-passagedata pid="180" name="Try kill hanging zombie" tags="" position="4804,816" size="100,100">The zombie to too high. You try stabbing its legs, but that doesn&#39;t kill it. 
+[[Investigate crates]]
+&lt;&lt;nobr&gt;&gt;
+&lt;&lt;if $stabZombieC5 is false&gt;&gt;
+[[Kill the zombie|Try kill hanging zombie]]
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="180" name="Try kill hanging zombie" tags="set-variable" position="4804,816" size="100,100">The zombie to too high. You try stabbing its legs, but that doesn&#39;t kill it. 
 
 You just leave it there. 
 
 [[Look around|Investigate barricaded room]]
-[[Pull zombie&#39;s pants down]]</tw-passagedata><tw-passagedata pid="181" name="Pull zombie&#39;s pants down" tags="" position="4843,942" size="100,100">That&#39;s gross.
+[[Pull zombie&#39;s pants down]]
+&lt;&lt;nobr&gt;&gt;
+&lt;&lt;set $stabZombieC5 to true&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="181" name="Pull zombie&#39;s pants down" tags="" position="4843,942" size="100,100">That&#39;s gross.
 
 And very disrespectful.
 
@@ -1525,7 +1538,15 @@ It&#39;s so heavy it will affect your ability to run.
 [[Go back inside|Back inside barricade]]</tw-passagedata><tw-passagedata pid="200" name="Child cry" tags="" position="5990,647" size="100,100">You hear a child crying.
 
 [[Go help|See child]]
-[[Ignore|Ignore child]]</tw-passagedata><tw-passagedata pid="201" name="Back inside barricade" tags="" position="5087,2620" size="100,100">You definitely don&#39;t want to go back in that place, it stinks really badly. 
+[[Ignore|Ignore child]]</tw-passagedata><tw-passagedata pid="201" name="Back inside barricade" tags="condition" position="5087,2620" size="100,100">You definitely don&#39;t want to go back in that place, it stinks really badly. 
+
+&lt;&lt;nobr&gt;&gt;
+&lt;&lt;if $killZombieBaby is false&gt;&gt;
+Also, there&#39;s that zombie baby.
+&lt;&lt;else&gt;&gt;
+Also, that zombie baby might still be alive.
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
 
 [[Continue|Chapter 5 summary]]</tw-passagedata><tw-passagedata pid="202" name="Fill backpack with food" tags="" position="5014,2194" size="100,100">You fill the backpack with as much food as you can.
 
@@ -1535,13 +1556,13 @@ From the direction of the baby&#39;s cot, you hear an uneartly hissing sound.
 [[Leave quickly|Outside barricade]]</tw-passagedata><tw-passagedata pid="203" name="Leave with empty backpack" tags="" position="4869,2102" size="100,100">You don&#39;t want to leave without taking any of this food with you, do you?
 
 [[Fill backpack with food]]
-[[Eat it all right now]]</tw-passagedata><tw-passagedata pid="204" name="investigate zombie baby" tags="" position="5139,2284" size="100,100">You see a small bony zombie baby pull itself out of the cot towards you. 
+[[Eat it all right now]]</tw-passagedata><tw-passagedata pid="204" name="investigate zombie baby" tags="decision" position="5139,2284" size="100,100">You see a small bony zombie baby pull itself out of the cot towards you. 
 
 It screams up at you in a way that gives you the chills.
 
 [[Attack the zombie baby]]
 [[Leave quickly|Outside barricade]]
-&lt;&lt;set $killZombieBaby to false&gt;&gt;</tw-passagedata><tw-passagedata pid="205" name="Attack the zombie baby" tags="" position="5176,2434" size="100,100">You kick the small xombie baby to the other side of the room. 
+&lt;&lt;set $killZombieBaby to false&gt;&gt;</tw-passagedata><tw-passagedata pid="205" name="Attack the zombie baby" tags="decision" position="5176,2434" size="100,100">You kick the small xombie baby to the other side of the room. 
 
 It hits the wall &amp; stays motionless, but might still be alive. 
 
@@ -1550,7 +1571,8 @@ It hits the wall &amp; stays motionless, but might still be alive.
 
 [[Ask her if she&#39;s okay]]
 [[Check her for zombie bites|Check girl for bite - angry dad]]
-[[Walk past|ignore girl C5]]</tw-passagedata><tw-passagedata pid="207" name="Ignore child" tags="" position="6193,1052" size="100,100">You start to walk out of town when a little girl comes up to you &amp; asks you for food.
+[[Walk past|ignore girl C5]]</tw-passagedata><tw-passagedata pid="207" name="Ignore child" tags="" position="6193,1052" size="100,100">&lt;&lt;set $ignoreGirlC6 to true&gt;&gt;
+You start to walk out of town when a little girl comes up to you &amp; asks you for food.
 
 She says her mum has been killed by zombies. 
 
@@ -1562,7 +1584,7 @@ She has dried blood on her coat.
 She has dried blood on her coat.
 
 [[Give her some food|Give girl some food]]
-[[Check her for zombie bites|Check girl for bite - angry dad]]</tw-passagedata><tw-passagedata pid="209" name="Check girl for bite - angry dad" tags="" position="5911,1310" size="100,100">You lift up the child&#39;s sleeves to check for zombie bites.
+[[Check her for zombie bites|Check girl for bite - angry dad]]</tw-passagedata><tw-passagedata pid="209" name="Check girl for bite - angry dad" tags="" position="5911,1287" size="100,100">You lift up the child&#39;s sleeves to check for zombie bites.
 
 Her Dad appears &amp; gets angry with you for touching his daughter. 
 
@@ -1570,33 +1592,36 @@ He pushes you over.
 
 [[Explain that you meant no harm|Man apologises]]
 [[Apologise &amp; Leave|Leave &amp; get called back]]
-[[Push him back]]</tw-passagedata><tw-passagedata pid="210" name="ignore girl C5" tags="" position="6033,956" size="100,100">The girl comes up to you &amp; says her mum has been killed by zombies. 
+[[Push him back]]</tw-passagedata><tw-passagedata pid="210" name="ignore girl C5" tags="" position="6033,956" size="100,100">&lt;&lt;set $ignoreGirlC6 to true&gt;&gt;
+The girl comes up to you &amp; says her mum has been killed by zombies. 
 
 She has dried blood on her coat.
 
 [[Give her some food|Give girl some food]]
-[[Check her for zombie bites|Check girl for bite - angry dad]]</tw-passagedata><tw-passagedata pid="211" name="Give girl some food" tags="" position="5766,1306" size="100,100">You take some biscuits out of your backpack &amp; give them to the little girl. 
+[[Check her for zombie bites|Check girl for bite - angry dad]]</tw-passagedata><tw-passagedata pid="211" name="Give girl some food" tags="" position="5766,1283" size="100,100">You take some biscuits out of your backpack &amp; give them to the little girl. 
 
 Her Dad appears &amp; gets angry with you. 
 
 He pushes you over.
 
 [[Apologise &amp; leave|Leave &amp; get called back]]
-[[Push him back]]</tw-passagedata><tw-passagedata pid="212" name="Leave &amp; get called back" tags="" position="5915,1482" size="100,100">As you turn to leave, the daughter explains that you were trying to help her. 
+[[Push him back]]</tw-passagedata><tw-passagedata pid="212" name="Leave &amp; get called back" tags="" position="5915,1459" size="100,100">As you turn to leave, the daughter explains that you were trying to help her. 
 
 The man calls you back.
 
-[[Turn around|Man apologises]]</tw-passagedata><tw-passagedata pid="213" name="Push him back" tags="" position="5762,1484" size="100,100">You get up &amp; push the man back. 
+[[Turn around|Man apologises]]
+[[Ignore him &amp; leave|ignore Ken]]</tw-passagedata><tw-passagedata pid="213" name="Push him back" tags="" position="5762,1461" size="100,100">You get up &amp; push the man back. 
 
 You&#39;ve taken him by surprise.
 
-[[Leave|Leave &amp; get called back]]</tw-passagedata><tw-passagedata pid="214" name="Man apologises" tags="" position="6044,1589" size="100,100">The man apologises &amp; introduces himself. 
+[[Walk away|Leave &amp; get called back]]
+[[Attack him &amp; steal his stuff|Attack ken]]</tw-passagedata><tw-passagedata pid="214" name="Man apologises" tags="" position="6044,1566" size="100,100">The man apologises &amp; introduces himself. 
 
 His name is Ken &amp; his daughter is Alice. 
 
 He says he also has a younger son at the car.
 
-[[Go to Ken&#39;s car]]</tw-passagedata><tw-passagedata pid="215" name="Go to Ken&#39;s car" tags="set-variables" position="6054,1736" size="100,100">Ken is taking some food supplies he&#39;s found from a wrecked car &amp; putting it into his own. 
+[[Go to Ken&#39;s car]]</tw-passagedata><tw-passagedata pid="215" name="Go to Ken&#39;s car" tags="set-variables" position="6053,1732" size="100,100">Ken is taking some food supplies he&#39;s found from a wrecked car &amp; putting it into his own. 
 
 His young son Cameron is in the car.
 
@@ -1605,70 +1630,47 @@ His young son Cameron is in the car.
 &lt;&lt;set $talkAlice to false&gt;&gt;
 &lt;&lt;set $talkKen to false&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;include &quot;Ken family options&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="216" name="Chapter 5 summary" tags="" position="4979,2797" size="100,100">&lt;i class=&quot;action&quot;&gt;End of chapter 5&lt;/i&gt;
+&lt;&lt;include &quot;Ken family options&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="216" name="Chapter 5 summary" tags="Summary" position="4979,2797" size="100,100">&lt;i class=&quot;action&quot;&gt;End of chapter 5&lt;/i&gt;
 
-&lt;&lt;if $threatenLady == false&gt;&gt;
-&lt;i class=&quot;summary&quot;&gt;You made the lady trust you&lt;/i&gt;
+&lt;&lt;if $cautiousC5 is true&gt;&gt;
+&lt;i class=&quot;summary&quot;&gt;You were cautious when entering the building&lt;/i&gt;
 &lt;&lt;else&gt;&gt;
-&lt;i class=&quot;summary&quot;&gt;You made the lady feel scared&lt;/i&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;if $threatenLady == false&gt;&gt;
-&lt;i class=&quot;summary&quot;&gt;You shared your juice&lt;/i&gt;
-&lt;&lt;else&gt;&gt;
-&lt;i class=&quot;summary&quot;&gt;You didn&#39;t share the juice&lt;/i&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;if $killedLady == true&gt;&gt;
-&lt;i class=&quot;summary&quot;&gt;You killed the lady before she turned into a zombie&lt;/i&gt;
-
-&lt;i class=&quot;summary&quot;&gt;The lady mentioned a safehouse&lt;/i&gt;
-&lt;&lt;else&gt;&gt;
-&lt;i class=&quot;summary&quot;&gt;You let the lady turn into a zombie&lt;/i&gt;
-
-&lt;i class=&quot;summary&quot;&gt;The lady mentioned a safehouse to the north&lt;/i&gt;
+&lt;i class=&quot;summary&quot;&gt;You were smart to check for zombies&lt;/i&gt;
 &lt;&lt;/if&gt;&gt;
 
-You killed the baby zombie
+&lt;i class=&quot;summary&quot;&gt;You collected some food &amp; supplies into a backpack.&lt;/i&gt;
+
+&lt;&lt;if $killZombieBaby is true&gt;&gt;
+&lt;i class=&quot;summary&quot;&gt;You attacked a zombie baby&lt;/i&gt;
+&lt;&lt;else&gt;&gt;
+&lt;i class=&quot;summary&quot;&gt;You ran away from a zombie baby&lt;/i&gt;
+&lt;&lt;/if&gt;&gt;
 
 [[Continue|Chapter 6 link]]</tw-passagedata><tw-passagedata pid="217" name="Chapter 6 link" tags="include" position="4979,2947" size="100,100">&lt;&lt;include &quot;Chapter 6&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="218" name="Chapter 6" tags="Chapter-start" position="5932,200" size="100,100">&lt;h2&gt;Chapter 6&lt;/h2&gt;
 &lt;h3&gt;Assistance&lt;/h3&gt;
-[[Continue|Earthquake C6]]</tw-passagedata><tw-passagedata pid="219" name="Chapter 6 summary" tags="" position="6376,2972" size="100,100">&lt;i class=&quot;action&quot;&gt;End of chapter 5&lt;/i&gt;
+[[Continue|Earthquake C6]]</tw-passagedata><tw-passagedata pid="219" name="Chapter 6 summary" tags="Summary" position="6821,4901" size="100,100">&lt;i class=&quot;action&quot;&gt;End of chapter 6&lt;/i&gt;
 
-&lt;&lt;if $threatenLady == false&gt;&gt;
-&lt;i class=&quot;summary&quot;&gt;You made the lady trust you&lt;/i&gt;
+&lt;&lt;if $ignoreGirlC6 == true&gt;&gt;
+&lt;i class=&quot;summary&quot;&gt;You tried to ignore a crying child&lt;/i&gt;
 &lt;&lt;else&gt;&gt;
-&lt;i class=&quot;summary&quot;&gt;You made the lady feel scared&lt;/i&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;if $threatenLady == false&gt;&gt;
-&lt;i class=&quot;summary&quot;&gt;You shared your juice&lt;/i&gt;
-&lt;&lt;else&gt;&gt;
-&lt;i class=&quot;summary&quot;&gt;You didn&#39;t share the juice&lt;/i&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;if $killedLady == true&gt;&gt;
-&lt;i class=&quot;summary&quot;&gt;You killed the lady before she turned into a zombie&lt;/i&gt;
-
-&lt;i class=&quot;summary&quot;&gt;The lady mentioned a safehouse&lt;/i&gt;
-&lt;&lt;else&gt;&gt;
-&lt;i class=&quot;summary&quot;&gt;You let the lady turn into a zombie&lt;/i&gt;
-
-&lt;i class=&quot;summary&quot;&gt;The lady mentioned a safehouse to the north&lt;/i&gt;
+&lt;i class=&quot;summary&quot;&gt;You chose to help a crying child&lt;/i&gt;
 &lt;&lt;/if&gt;&gt;
 
-You killed the baby zombie
+&lt;i class=&quot;summary&quot;&gt;Ken drove away with your backpack&lt;/i&gt;
+&lt;&lt;if $lieToKen == true&gt;&gt;
+&lt;i class=&quot;summary&quot;&gt;You lied to Ken about the contents of the backpack&lt;/i&gt;
+&lt;i class=&quot;summary&quot;&gt;You were right to be skeptical of Ken&lt;/i&gt;
+&lt;&lt;else&gt;&gt;
+&lt;i class=&quot;summary&quot;&gt;You trusted Ken, but he stole your backpack&lt;/i&gt;
+&lt;&lt;/if&gt;&gt;
 
-You trusted Ken - but he betrayed you.
-You were skeptical of Ken
+[[Continue|Chapter 7 link]]</tw-passagedata><tw-passagedata pid="220" name="Chapter 7 link" tags="" position="6821,5051" size="100,100">&lt;h2&gt;To be continued&lt;/h2&gt;
 
-Ken stole your backpack of
+This is the end of the story so far, but there will be more!
 
-You learned where Ken was going
-You didn&#39;t ask Ken where he was going
+Get an email when more chapters are released:
 
-You formed a relationship with Alice
-You formed a relationship with Cameron
-
-[[Continue|Chapter 7 link]]</tw-passagedata><tw-passagedata pid="220" name="Chapter 7 link" tags="" position="6376,3122" size="100,100">&lt;h2&gt;To be continued&lt;/h2&gt;
-
-This is the end of the story so far, but there will be more!</tw-passagedata><tw-passagedata pid="221" name="Earthquake C6" tags="" position="5922,334" size="100,100">An Earthquake shakes the buildings around you &amp; a crack appears in the ground. 
+&lt;a href=&quot;https://mailchi.mp/2d08e82fbbd4/text-adventures&quot;&gt;Subscribe&lt;/a&gt;</tw-passagedata><tw-passagedata pid="221" name="Earthquake C6" tags="" position="5922,334" size="100,100">An Earthquake shakes the buildings around you &amp; a crack appears in the ground. 
 
 The heavy bell from a church tower you&#39;re right next to clangs to the ground. 
 
@@ -1717,7 +1719,7 @@ Her Dad only told her it&#39;s somewhere safer than here.
 
 &lt;&lt;include &quot;Ken family options&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="230" name="Ask Ken to travel with them" tags="set-variable" position="6354,2008" size="100,100">You ask Ken if you can ride with them to wherever they&#39;re going.
 
-He says he&#39;l think about it. 
+He says he&#39;ll think about it. 
 
 He asks you what&#39;s in your backpack.
 
@@ -1725,89 +1727,218 @@ He asks you what&#39;s in your backpack.
 [[Tell him it&#39;s just some belongings]]
 &lt;&lt;nobr&gt;&gt;
 &lt;&lt;set $backpackInCar is false&gt;&gt;
+&lt;&lt;set $lieToKen is false&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="231" name="Ask what happened to his mum" tags="include" position="6050,2278" size="100,100">Cameron doesn&#39;t answer directly. But grabs the largest toy &amp; makes it eat a Barbie doll.
 
 &lt;i class=&quot;action-success&quot;&gt;Cameron likes you&lt;/i&gt;
 
-&lt;&lt;include &quot;Ken family options&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="232" name="Tell him it&#39;s food" tags="" position="6320,2158" size="100,100">Ken agrees to take you with them. 
+&lt;&lt;include &quot;Ken family options&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="232" name="Tell him it&#39;s food" tags="set-variable" position="6320,2158" size="100,100">Ken agrees to take you with them. 
 
 They&#39;re travelling north to the safehouse. 
 
 He tells you to put the backpack in the car
 
-[[Put backpack in the car]]</tw-passagedata><tw-passagedata pid="233" name="Tell him it&#39;s just some belongings" tags="" position="6466,2158" size="100,100">You lie &amp; don&#39;t tell Ken the backpack is full of food.
+[[Put backpack in the car]]
+&lt;&lt;nobr&gt;&gt;
+&lt;&lt;set $lieToKen is false&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="233" name="Tell him it&#39;s just some belongings" tags="set-variable" position="6466,2158" size="100,100">You lie &amp; don&#39;t tell Ken the backpack is full of food.
 
 He doesn&#39;t believe you.
 
 &lt;i class=&quot;action-bad&quot;&gt;Your relationship with Ken has deteriorated&lt;/i&gt;
 
-[[Continue|Zombies attack ken - lied]]</tw-passagedata><tw-passagedata pid="234" name="Put backpack in the car" tags="decision" position="6320,2308" size="100,100">You put the backpack next to Cameron &amp; he grins. 
+[[Continue|Zombies attack ken - lied]]
+&lt;&lt;nobr&gt;&gt;
+&lt;&lt;set $lieToKen is true&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="234" name="Put backpack in the car" tags="decision" position="6321,2302" size="100,100">You put the backpack next to Cameron &amp; he grins. 
 
 [[Continue|Zombies attack ken - truthful]]
 &lt;&lt;nobr&gt;&gt;
 &lt;&lt;set $backpackInCar is true&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="235" name="Zombies attack ken - truthful" tags="" position="6427,2451" size="100,100">Ken calls you over.
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="235" name="Zombies attack ken - truthful" tags="" position="6420,2436" size="100,100">Ken calls you over.
 
 Several zombies are approaching on the opposite side of the car. 
 
-Ken asks you to give him your knife. 
+Ken asks you to throw him your knife. 
 
-[[Give knife to Ken]]
+[[Throw knife to Ken]]
+[[Attack zombies yourself|Attack zombies without Ken]]</tw-passagedata><tw-passagedata pid="236" name="Throw knife to Ken" tags="" position="6413,2617" size="100,100">You throw the knife to Ken.
+
+&lt;i class=&quot;action-success&quot;&gt;Ken is thankful.&lt;/i&gt; 
+
+Ken kills the closest zombies. Giving you enough time to get around the car. 
+
+[[Help Ken|Defend car without knife]]
+[[Stand &amp; watch|Need to defend car]]</tw-passagedata><tw-passagedata pid="237" name="Attack zombies without Ken" tags="condition" position="6582,2613" size="100,100">You go around the car &amp; attack the closest zombies. 
+
+Ken asks you to keep them busy while he starts the car engine. 
+
 &lt;&lt;nobr&gt;&gt;
-&lt;&lt;if $backpackInCar is true&gt;&gt;
-[[Attack zombies yourself|Attack zombies yourself with backpack]]
-&lt;&lt;else&gt;&gt;
-[[Attack zombies yourself|Attack zombies yourself no backpack]]
+&lt;&lt;if $backpackInCar is false&gt;&gt;
+Your heavy backpack is making it difficult to fight the zombies, so you drop it on the floor. 
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="236" name="Give knife to Ken" tags="" position="6392,2621" size="100,100">You pass the knife to Ken &amp; he kills the closest zombies. 
+&lt;&lt;/nobr&gt;&gt;
 
-You realise there&#39;s quite a lot more on the way. Too many. 
+[[Defend the car|Attack zombies C6]]
+[[Get in car|Need to defend car]]</tw-passagedata><tw-passagedata pid="238" name="Zombies attack ken - lied" tags="" position="6548,2436" size="100,100">Several zombies are approaching on the opposite side of the car. 
 
-</tw-passagedata><tw-passagedata pid="237" name="Attack zombies yourself" tags="" position="6667,2621" size="100,100">You go around the car &amp; attack the closest zombies. 
+Ken asks you to throw him your knife. 
 
-Ken starts the car engine. </tw-passagedata><tw-passagedata pid="238" name="Zombies attack ken - lied" tags="" position="6555,2451" size="100,100">Several zombies are approaching on the opposite side of the car. 
-
-Ken asks you to give him your knife. 
-
-[[Give knife to Ken]]
-[[Attack zombies yourself]]</tw-passagedata><tw-passagedata pid="239" name="Save the juice for later" tags="" position="4179,2414" size="100,100">&lt;p class=&quot;small&quot;&gt;You&#39;re dead thirsty but decide to save the juice for later&lt;/p&gt;
+[[Throw knife to Ken]]
+[[Attack zombies without Ken]]</tw-passagedata><tw-passagedata pid="239" name="Save the juice for later" tags="" position="4179,2414" size="100,100">&lt;p class=&quot;small&quot;&gt;You&#39;re dead thirsty but decide to save the juice for later&lt;/p&gt;
 &lt;p class=&quot;small&quot;&gt;A lady rushes into the shop through the open door.&lt;/p&gt;
 &lt;p class=&quot;small&quot;&gt;She&#39;s covered with sweat &amp; is wearing a dirty winter jacket.&lt;/p&gt;
 [[Say hello|Greet woman C4]]
 [[Hide|Hide C4]]
-[[Pull out your knife|Knife in cafe C4]]</tw-passagedata><tw-passagedata pid="240" name="Attack zombies yourself with backpack" tags="" position="6252,2608" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="241" name="Attack zombies yourself no backpack" tags="" position="6530,2622" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="242" name="Eat it all right now" tags="" position="4829,2258" size="100,100">You&#39;re hungry, but eating food in here is not that appetizing. 
+[[Pull out your knife|Knife in cafe C4]]</tw-passagedata><tw-passagedata pid="240" name="Eat it all right now" tags="" position="4829,2258" size="100,100">You&#39;re hungry, but eating food in here is not that appetizing. 
 &lt;&lt;if $ateStinkyFood is true&gt;&gt;
 You&#39;ve already tried, &amp; it made you feel ill.
 &lt;&lt;/if&gt;&gt;
 You should collect it for later. 
 
-[[Fill backpack with food]]</tw-passagedata><tw-passagedata pid="243" name="Run away C4" tags="" position="4444,4153" size="100,100">You try to run away, but the cafe is quite small. 
+[[Fill backpack with food]]</tw-passagedata><tw-passagedata pid="241" name="Run away C4" tags="" position="4444,4153" size="100,100">You try to run away, but the cafe is quite small. 
 
 Outside there&#39;s far too many zombies. 
 
 [[Stab her|Stab zombie lady C4]]
-[[Open the refrigerator|Open refrigerator zombie]]</tw-passagedata><tw-passagedata pid="244" name="Open refrigerator zombie" tags="" position="4460,4312" size="100,100">You open the refrigerator &amp; the smell of rotting ham hits you.
+[[Open the refrigerator|Open refrigerator zombie]]</tw-passagedata><tw-passagedata pid="242" name="Open refrigerator zombie" tags="" position="4460,4312" size="100,100">You open the refrigerator &amp; the smell of rotting ham hits you.
 
 The zombie growls at you. 
 
 [[Throw ham at zombie]]
-[[Stab zombie|Stab zombie lady C4]]</tw-passagedata><tw-passagedata pid="245" name="Throw ham at zombie" tags="" position="4386,4465" size="100,100">The rotting plate of ham has enough force to knock the zombie to its knees. 
+[[Stab zombie|Stab zombie lady C4]]</tw-passagedata><tw-passagedata pid="243" name="Throw ham at zombie" tags="" position="4386,4465" size="100,100">The rotting plate of ham has enough force to knock the zombie to its knees. 
 
-[[Stab zombie|Stab zombie lady C4]]</tw-passagedata><tw-passagedata pid="246" name="Joke with Ken" tags="include" position="5753,2147" size="100,100">You joke with Ken &amp; ask him if he&#39;s been keeping up with the sport. 
+[[Stab zombie|Stab zombie lady C4]]</tw-passagedata><tw-passagedata pid="244" name="Joke with Ken" tags="include" position="5753,2147" size="100,100">You joke with Ken &amp; ask him if he&#39;s been keeping up with the sport. 
 
 He doesn&#39;t find it very funny. 
 
 You finish helping him in awkward silence. 
 
-&lt;i class=&quot;action-bad&quot;&gt;Your relationship with Ken has deteriorated&lt;/i&gt;
-
-&lt;&lt;include &quot;Ken family options&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="247" name="Ask what happened to the kids mum" tags="include" position="5896,2147" size="100,100">Ken goes quiet &amp; pretends you hadn&#39;t said anything. 
+&lt;&lt;include &quot;Ken family options&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="245" name="Ask what happened to the kids mum" tags="include" position="5896,2147" size="100,100">Ken goes quiet &amp; pretends you hadn&#39;t said anything. 
 
 You help him in awkward silence. 
 
-&lt;i class=&quot;action-bad&quot;&gt;Your relationship with Ken has deteriorated&lt;/i&gt;
+&lt;&lt;include &quot;Ken family options&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="246" name="Ignore C5" tags="" position="4937,424" size="100,100">You&#39;re so hungry right now, you need to look for supplies.
 
-&lt;&lt;include &quot;Ken family options&quot;&gt;&gt;</tw-passagedata></tw-storydata>
+This place must be barricaded for some reason. 
+
+[[See what&#39;s inside|Go inside barricade]]</tw-passagedata><tw-passagedata pid="247" name="Defend car without knife" tags="" position="6309,2786" size="100,100">Ken gives you your knife back.
+
+He tells you to distract the zombies long enough for him to start the car. 
+
+[[Attack the zombies|Attack zombies C6]]
+[[Get in car|Need to defend car]]</tw-passagedata><tw-passagedata pid="248" name="Attack zombies C6" tags="" position="6587,3051" size="100,100">With the knife, you slash at the closest zombie. 
+
+[[Stab it in the heart]]
+[[Stab it in the head]]</tw-passagedata><tw-passagedata pid="249" name="Need to defend car" tags="" position="6507,2810" size="100,100">Ken needs you to fight the zombies while he&#39;s starting the car. 
+
+More zombies turn up. There&#39;s hundreds of them now. 
+
+[[Attack the zombies|Attack zombies C6]]</tw-passagedata><tw-passagedata pid="250" name="Stab it in the heart" tags="" position="6512,3201" size="100,100">Stabbing the zombie in the heart covers you in blood, but doesn&#39;t stop the zombie. 
+
+[[Stab it in the head]]</tw-passagedata><tw-passagedata pid="251" name="Stab it in the head" tags="" position="6661,3222" size="100,100">You stab the closest zombie in the head.
+
+It falls the the floor.
+
+Behind you, you hear Ken&#39;s car engine starting. 
+
+[[Get in the car]]
+[[Keep fighting]]</tw-passagedata><tw-passagedata pid="252" name="Get in the car" tags="" position="6659,3354" size="100,100">You turn away from the zombies &amp; head back to the car. 
+
+Ken drives the car past you. 
+
+[[Shout at him to wait for you]]
+[[Run after the car|Shout at him to wait for you]]</tw-passagedata><tw-passagedata pid="253" name="Keep fighting" tags="" position="6809,3354" size="100,100">You pull another 2 zombies away from the car, allowing the car to start moving. 
+
+Ken doesn&#39;t stop, and drives the car away. 
+
+[[Shout at him to wait for you]]
+[[Run after the car|Shout at him to wait for you]]</tw-passagedata><tw-passagedata pid="254" name="Attack ken" tags="" position="5607,1566" size="100,100">He looks quite a lot tougher than you, he&#39;d definitly beat you in a fight. 
+
+Luckily for you, he apologises for being agressive, &amp; invites you to meet his family. 
+
+[[Follow him|Go to Ken&#39;s car]]
+[[Ignore him &amp; leave|ignore Ken]]</tw-passagedata><tw-passagedata pid="255" name="ignore Ken" tags="" position="5850,1730" size="100,100">As you walk away, the man introduces himself as Ken, &amp; his daughter is Alice. 
+
+He asks you for help loading supplies into his car. 
+
+[[Help him|Go to Ken&#39;s car]]</tw-passagedata><tw-passagedata pid="256" name="Shout at him to wait for you" tags="" position="6724,3504" size="100,100">Ken sees you through his rear view mirror, but keeps driving away. 
+
+He&#39;s left you &amp; taken your backpack. 
+
+You&#39;re now left alone to fight a crowd of zombies. 
+
+[[Fight|Fight C6]]
+[[Run|Run before they surround you]]</tw-passagedata><tw-passagedata pid="257" name="Fight C6" tags="" position="6649,3654" size="100,100">The zombies gather around you, leaving you nowhere to escape. 
+
+A naked one with long arms grabs your knife arm, while one with long hair &amp; overalls lunges at your throat. 
+
+[[Break free]]
+[[Kick]]</tw-passagedata><tw-passagedata pid="258" name="Run before they surround you" tags="" position="6736,4074" size="100,100">Before the zombies surround you, you escape &amp; run towards the church with the tower. 
+
+The church has a large wooden main door, &amp; a path to the graveyard around the side. 
+
+The zombies follow you. 
+
+[[Push the door|Push the church door]]
+[[Go to graveyard|Go to graveyard]]</tw-passagedata><tw-passagedata pid="259" name="Break free" tags="" position="6606,3793" size="100,100">You twist the arm of the naked zombie who&#39;s grabbing you until you hear a bone snap. 
+
+Its arm falls limp, allowing you to use your knife to stab overalls in the head. 
+
+[[Run|Run before they surround you]]
+[[Stab the naked zombie]]</tw-passagedata><tw-passagedata pid="260" name="Kick" tags="" position="6428,3788" size="100,100">You kick the zombie in overalls &amp; it falls backwards into the crowd, giving you a few seconds to break free.  
+
+You twist the arm of the naked zombie who&#39;s grabbing you until you hear a bone snap. 
+
+[[Run|Run before they surround you]]
+[[Stab the naked zombie]]</tw-passagedata><tw-passagedata pid="261" name="Push the church door" tags="" position="6822,4746" size="100,100">As you approach the door to the church, it opens.
+
+You&#39;re greeted by a concerned but friendly face, &amp; beckoned inside. 
+
+The door is closed behind you. 
+
+You&#39;re safe for now. 
+
+[[Continue|Chapter 6 summary]] </tw-passagedata><tw-passagedata pid="262" name="Go to graveyard" tags="" position="7000,4599" size="100,100">You head towards the graveyard, but it looks like some zombies are already there. 
+
+They start coming towards you. 
+
+[[Enter the church|Push the church door]] </tw-passagedata><tw-passagedata pid="263" name="Stab the naked zombie" tags="" position="6519,4069" size="100,100">You stab the naked zombie &amp; his grimy body drops to the floor, tripping some others which are getting close. 
+
+[[Escape|Run after attacking]]
+[[Keep fighting|Attack near church]]</tw-passagedata><tw-passagedata pid="264" name="Run after attacking" tags="" position="6632,4396" size="100,100">You escape towards the nearest building, a church. 
+
+The church has a large wooden main door, &amp; a path to the graveyard around the side. 
+
+The zombies follow you. 
+
+[[Push the door|Push the church door]]
+[[Go to graveyard|Go to graveyard]]</tw-passagedata><tw-passagedata pid="265" name="Attack near church" tags="" position="6384,4249" size="100,100">The amount of zombies pushes you up the steps of a churchyard, but you keep fighting. 
+
+A chunky zombie with half his face missing lumbers towards you, stepping on the one you just killed &amp; smashing its face like a watermelon. 
+
+[[Stab it|Stab chunky]]
+[[Look for a bigger weapon|Find weapon againt chunky]]
+</tw-passagedata><tw-passagedata pid="266" name="Stab chunky" tags="" position="6309,4399" size="100,100">Your weapon disappears into his gut, &amp; stays there. 
+
+[[Look for a bigger weapon|Find weapon againt chunky]]
+[[Run to the church|Escape to church]] </tw-passagedata><tw-passagedata pid="267" name="Find weapon againt chunky" tags="" position="6459,4399" size="100,100">You know that your tiny knife won&#39;t do anything against this chunky zombie. 
+
+You look around for another weapon.
+
+[[Use the church gate]]
+[[Escape|Escape to church]]</tw-passagedata><tw-passagedata pid="268" name="Use the church gate" tags="" position="6288,4605" size="100,100">You slam the hinged metal gate into the zombies face.
+
+he staggers backwards. 
+
+The force of the zombie crowd push the gate over &amp; push you backwards. 
+
+[[Retreat to the church|Escape to church]] </tw-passagedata><tw-passagedata pid="269" name="Escape to church" tags="" position="6496,4601" size="100,100">The church has a large wooden main door, &amp; a path to the graveyard around the side. 
+
+The zombies follow you. 
+
+[[Push the door|Push the church door]]
+[[Go to graveyard|Go to graveyard]]</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
 	if(document.documentElement.getAttribute("data-init")==="loading"){!function(window,document,jQuery,undefined){"use strict";function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,r=Array(e.length);t<e.length;t++)r[t]=e[t];return r}return Array.from(e)}var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_slicedToArray=function(){function e(e,t){var r=[],n=!0,a=!1,i=undefined;try{for(var o,s=e[Symbol.iterator]();!(n=(o=s.next()).done)&&(r.push(o.value),!t||r.length!==t);n=!0);}catch(e){a=!0,i=e}finally{try{!n&&s.return&&s.return()}finally{if(a)throw i}}return r}return function(t,r){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,r);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},errorPrologRegExp=/^(?:(?:uncaught\s+(?:exception:\s+)?)?\w*(?:error|exception|_err):\s+)+/i,Alert=function(){function e(e,t,r,n){var a="fatal"===e,i="Apologies! "+(a?"A fatal":"An")+" error has occurred.";i+=a?" Aborting.":" You may be able to continue, but some parts may not work properly.",null==t&&null==r||(i+="\n\nError",null!=t&&(i+=" ["+t+"]"),i+=null!=r?": "+r.replace(errorPrologRegExp,"")+".":": unknown error."),"object"===(void 0===n?"undefined":_typeof(n))&&n.stack&&(i+="\n\nStack Trace:\n"+n.stack),window.alert(i)}function t(t,r,n){e(null,t,r,n)}function r(t,r,n){e("fatal",t,r,n)}return function(e){window.onerror=function(n,a,i,o,s){"complete"===document.readyState?t(null,n,s):(r(null,n,s),window.onerror=e,"function"==typeof window.onerror&&window.onerror.apply(this,arguments))}}(window.onerror),Object.freeze(Object.defineProperties({},{error:{value:t},fatal:{value:r}}))}(),Patterns=function(){var e=function(){var e=new Map([[" ","\\u0020"],["\f","\\f"],["\n","\\n"],["\r","\\r"],["\t","\\t"],["\v","\\v"],[" ","\\u00a0"],[" ","\\u1680"],["᠎","\\u180e"],[" ","\\u2000"],[" ","\\u2001"],[" ","\\u2002"],[" ","\\u2003"],[" ","\\u2004"],[" ","\\u2005"],[" ","\\u2006"],[" ","\\u2007"],[" ","\\u2008"],[" ","\\u2009"],[" ","\\u200a"],["\u2028","\\u2028"],["\u2029","\\u2029"],[" ","\\u202f"],[" ","\\u205f"],["　","\\u3000"],["\ufeff","\\ufeff"]]),t=/^\s$/,r="";return e.forEach(function(e,n){t.test(n)||(r+=e)}),r?"[\\s"+r+"]":"\\s"}(),t="\\s"===e?"\\S":e.replace(/^\[/,"[^"),r="[0-9A-Z_a-z\\-\\u00c0-\\u00d6\\u00d8-\\u00f6\\u00f8-\\u00ff\\u0150\\u0170\\u0151\\u0171]",n=r.replace("\\-",""),a=function(){return"("+r+"+)\\(([^\\)\\|\\n]+)\\):|("+r+"+):([^;\\|\\n]+);|((?:\\."+r+"+)+);|((?:#"+r+"+)+);"}();return Object.freeze({space:e,spaceNoTerminator:"[\\u0020\\f\\t\\v\\u00a0\\u1680\\u180e\\u2000-\\u200a\\u202f\\u205f\\u3000\\ufeff]",lineTerminator:"[\\n\\r\\u2028\\u2029]",notSpace:t,anyChar:"(?:.|[\\n\\r\\u2028\\u2029])",anyLetter:r,anyLetterStrict:n,identifierFirstChar:"[$A-Z_a-z]",identifierNextChar:"[$0-9A-Z_a-z]",identifier:"[$A-Z_a-z][$0-9A-Z_a-z]*",variableSigil:"[$_]",variable:"[$_][$A-Z_a-z][$0-9A-Z_a-z]*",macroName:"[A-Za-z][\\w-]*|[=-]",templateName:"[A-Za-z][\\w-]*",cssImage:"\\[[<>]?[Ii][Mm][Gg]\\[(?:\\s|\\S)*?\\]\\]+",inlineCss:a,url:"(?:file|https?|mailto|ftp|javascript|irc|news|data):[^\\s'\"]+"})}();!function(){!function(e){if(e&&e.prototype&&null==e.prototype.firstElementChild){var t=Node.ELEMENT_NODE;Object.defineProperty(e.prototype,"firstElementChild",{get:function(){for(var e=this.childNodes,r=0;r<e.length;++r){var n=e[r];if(n.nodeType===t)return n}return null}})}}(window.Node||window.Element)}(),function(){function e(e,t){var r=Number.parseInt(e,10)||0;if(r<1)return"";var n=void 0===t?"":String(t);for(""===n&&(n=" ");n.length<r;){var a=n.length,i=r-a;n+=a>i?n.slice(0,i):n}return n.length>r&&(n=n.slice(0,r)),n}var t=function(){function e(e,n){var a=String(e);if(!a)return a;switch(n){case"start":return t.test(a)?a.replace(t,""):a;case"end":return r.test(a)?a.replace(r,""):a;default:throw new Error('_trimString called with incorrect where parameter value: "'+n+'"')}}var t=new RegExp("^"+Patterns.space+Patterns.space+"*"),r=new RegExp(""+Patterns.space+Patterns.space+"*$");return e}();Array.prototype.flat||Object.defineProperty(Array.prototype,"flat",{configurable:!0,writable:!0,value:function(){function e(){if(null==this)throw new TypeError("Array.prototype.flat called on null or undefined");var t=0===arguments.length?1:Number(arguments[0])||0;return t<1?Array.prototype.slice.call(this):Array.prototype.reduce.call(this,function(r,n){return n instanceof Array?r.push.apply(r,_toConsumableArray(e.call(n,t-1))):r.push(n),r},[])}return e}()}),Array.prototype.flatMap||Object.defineProperty(Array.prototype,"flatMap",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatMap called on null or undefined");return Array.prototype.map.apply(this,arguments).flat()}}),Array.prototype.includes||Object.defineProperty(Array.prototype,"includes",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includes called on null or undefined");if(0===arguments.length)return!1;var e=this.length>>>0;if(0===e)return!1;var t=arguments[0],r=Number(arguments[1])||0;for(r<0&&(r=Math.max(0,e+r));r<e;++r){var n=this[r];if(n===t||n!==n&&t!==t)return!0}return!1}}),Object.entries||Object.defineProperty(Object,"entries",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.entries object parameter must be an object");return Object.keys(e).map(function(t){return[t,e[t]]})}}),Object.fromEntries||Object.defineProperty(Object,"fromEntries",{configurable:!0,writable:!0,value:function(e){return Array.from(e).reduce(function(e,t){if(Object(t)!==t)throw new TypeError("Object.fromEntries iterable parameter must yield objects");return t[0]in e?Object.defineProperty(e,t[0],{configurable:!0,enumerable:!0,writable:!0,value:t[1]}):e[t[0]]=t[1],e},{})}}),Object.getOwnPropertyDescriptors||Object.defineProperty(Object,"getOwnPropertyDescriptors",{configurable:!0,writable:!0,value:function(e){if(null==e)throw new TypeError("Object.getOwnPropertyDescriptors object parameter is null or undefined");var t=Object(e);return Reflect.ownKeys(t).reduce(function(e,r){var n=Object.getOwnPropertyDescriptor(t,r);return void 0!==n&&(r in e?Object.defineProperty(e,r,{configurable:!0,enumerable:!0,writable:!0,value:n}):e[r]=n),e},{})}}),Object.values||Object.defineProperty(Object,"values",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.values object parameter must be an object");return Object.keys(e).map(function(t){return e[t]})}}),String.prototype.padStart||Object.defineProperty(String.prototype,"padStart",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padStart called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:e(i-a,r)+n}}),String.prototype.padEnd||Object.defineProperty(String.prototype,"padEnd",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padEnd called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:n+e(i-a,r)}}),String.prototype.trimStart||Object.defineProperty(String.prototype,"trimStart",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimStart called on null or undefined");return t(this,"start")}}),String.prototype.trimLeft||Object.defineProperty(String.prototype,"trimLeft",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimLeft called on null or undefined");return t(this,"start")}}),String.prototype.trimEnd||Object.defineProperty(String.prototype,"trimEnd",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimEnd called on null or undefined");return t(this,"end")}}),String.prototype.trimRight||Object.defineProperty(String.prototype,"trimRight",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimRight called on null or undefined");return t(this,"end")}})}(),function(){function _random(){var e=void 0,t=void 0;switch(arguments.length){case 0:throw new Error("_random called with insufficient parameters");case 1:e=0,t=arguments[0];break;default:e=arguments[0],t=arguments[1]}if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.floor(_nativeMathRandom()*(t-e+1))+e}function _randomIndex(e,t){var r=void 0,n=void 0;switch(t.length){case 1:r=0,n=e-1;break;case 2:r=0,n=Math.trunc(t[1]);break;default:r=Math.trunc(t[1]),n=Math.trunc(t[2])}return Number.isNaN(r)?r=0:!Number.isFinite(r)||r>=e?r=e-1:r<0&&(r=e+r)<0&&(r=0),Number.isNaN(n)?n=0:!Number.isFinite(n)||n>=e?n=e-1:n<0&&(n=e+n)<0&&(n=e-1),_random(r,n)}function _getCodePointStartAndEnd(e,t){var r=e.charCodeAt(t);if(Number.isNaN(r))return{char:"",start:-1,end:-1};if(r<55296||r>57343)return{char:e.charAt(t),start:t,end:t};if(r>=55296&&r<=56319){var n=t+1;if(n>=e.length)throw new Error("high surrogate without trailing low surrogate");var a=e.charCodeAt(n);if(a<56320||a>57343)throw new Error("high surrogate without trailing low surrogate");return{char:e.charAt(t)+e.charAt(n),start:t,end:n}}if(0===t)throw new Error("low surrogate without leading high surrogate");var i=t-1,o=e.charCodeAt(i);if(o<55296||o>56319)throw new Error("low surrogate without leading high surrogate");return{char:e.charAt(i)+e.charAt(t),start:i,end:t}}var _nativeMathRandom=Math.random;Object.defineProperty(Array,"random",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e||!Object.prototype.hasOwnProperty.call(e,"length"))throw new TypeError("Array.random array parameter must be an array or array-lke object");var t=e.length>>>0;if(0!==t){return e[0===arguments.length?_random(0,t-1):_randomIndex(t,Array.prototype.slice.call(arguments,1))]}}}),Object.defineProperty(Array.prototype,"concatUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.concatUnique called on null or undefined");var e=Array.from(this);if(0===arguments.length)return e;var t=Array.prototype.reduce.call(arguments,function(e,t){return e.concat(t)},[]),r=t.length;if(0===r)return e;for(var n=Array.prototype.indexOf,a=Array.prototype.push,i=0;i<r;++i){var o=t[i];-1===n.call(e,o)&&a.call(e,o)}return e}}),Object.defineProperty(Array.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.count called on null or undefined");for(var e=Array.prototype.indexOf,t=arguments[0],r=Number(arguments[1])||0,n=0;-1!==(r=e.call(this,t,r));)++n,++r;return n}}),Object.defineProperty(Array.prototype,"delete",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.delete called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.concat.apply([],arguments),r=t.length,n=[],a=0;a<e;++a)for(var i=this[a],o=0;o<r;++o){var s=t[o];if(i===s||i!==i&&s!==s){n.push(a);break}}for(var u=[],l=0,c=n.length;l<c;++l)u[l]=this[n[l]];for(var d=Array.prototype.splice,f=n.length-1;f>=0;--f)d.call(this,n[f],1);return u}}),Object.defineProperty(Array.prototype,"deleteAt",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.deleteAt called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.splice,r=[].concat(_toConsumableArray(new Set(Array.prototype.concat.apply([],arguments).map(function(t){return t<0?Math.max(0,e+t):t})).values())),n=[].concat(_toConsumableArray(r)).sort(function(e,t){return t-e}),a=[],i=0,o=r.length;i<o;++i)a[i]=this[r[i]];for(var s=0,u=n.length;s<u;++s)t.call(this,n[s],1);return a}}),Object.defineProperty(Array.prototype,"deleteWith",{configurable:!0,writable:!0,value:function(e,t){if(null==this)throw new TypeError("Array.prototype.deleteWith called on null or undefined");if("function"!=typeof e)throw new Error("Array.prototype.deleteWith predicate parameter must be a function");var r=this.length>>>0;if(0===r)return[];for(var n=Array.prototype.splice,a=[],i=[],o=0;o<r;++o)e.call(t,this[o],o,this)&&(i.push(this[o]),a.push(o));for(var s=a.length-1;s>=0;--s)n.call(this,a[s],1);return i}}),Object.defineProperty(Array.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.first called on null or undefined");if(0!=this.length>>>0)return this[0]}}),Object.defineProperty(Array.prototype,"includesAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAll called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAll.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(!Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!1;return!0}}),Object.defineProperty(Array.prototype,"includesAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAny called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAny.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!0;return!1}}),Object.defineProperty(Array.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.last called on null or undefined");var e=this.length>>>0;if(0!==e)return this[e-1]}}),Object.defineProperty(Array.prototype,"pluck",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pluck called on null or undefined");var e=this.length>>>0;if(0!==e){var t=0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)));return Array.prototype.splice.call(this,t,1)[0]}}}),Object.defineProperty(Array.prototype,"pluckMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.pluckMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.pluckMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=Array.prototype.splice,a=[],i=t-1;do{a.push(n.call(this,_random(0,i--),1)[0])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"pushUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pushUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.push,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Array.prototype,"random",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.random called on null or undefined");var e=this.length>>>0;if(0!==e){return this[0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)))]}}}),Object.defineProperty(Array.prototype,"randomMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.randomMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.randomMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=new Map,a=[],i=t-1;do{var o=void 0;do{o=_random(0,i)}while(n.has(o));n.set(o,!0),a.push(this[o])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"shuffle",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.shuffle called on null or undefined");var e=this.length>>>0;if(0===e)return this;for(var t=e-1;t>0;--t){var r=Math.floor(_nativeMathRandom()*(t+1));if(t!==r){var n=this[t];this[t]=this[r],this[r]=n}}return this}}),Object.defineProperty(Array.prototype,"unshiftUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.unshiftUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.unshift,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Function.prototype,"partial",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Function.prototype.partial called on null or undefined");var e=Array.prototype.slice,t=this,r=e.call(arguments,0);return function(){for(var n=[],a=0,i=0;i<r.length;++i)n.push(r[i]===undefined?arguments[a++]:r[i]);return t.apply(this,n.concat(e.call(arguments,a)))}}}),Object.defineProperty(Math,"clamp",{configurable:!0,writable:!0,value:function(e,t,r){var n=Number(e);return Number.isNaN(n)?NaN:n.clamp(t,r)}}),Object.defineProperty(Math,"easeInOut",{configurable:!0,writable:!0,value:function(e){return 1-(Math.cos(Number(e)*Math.PI)+1)/2}}),Object.defineProperty(Number.prototype,"clamp",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Number.prototype.clamp called on null or undefined");if(2!==arguments.length)throw new Error("Number.prototype.clamp called with an incorrect number of parameters");var e=Number(arguments[0]),t=Number(arguments[1]);if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.min(Math.max(this,e),t)}}),RegExp.escape||function(){var e=/[\\^$*+?.()|[\]{}]/g,t=new RegExp(e.source);Object.defineProperty(RegExp,"escape",{configurable:!0,writable:!0,value:function(r){var n=String(r);return n&&t.test(n)?n.replace(e,"\\$&"):n}})}(),function(){var e=/{(\d+)(?:,([+-]?\d+))?}/g,t=new RegExp(e.source);Object.defineProperty(String,"format",{configurable:!0,writable:!0,value:function(r){function n(e,t,r){if(!t)return e;var n=Math.abs(t)-e.length;if(n<1)return e;var a=String(r).repeat(n);return t<0?e+a:a+e}if(arguments.length<2)return 0===arguments.length?"":r;var a=2===arguments.length&&Array.isArray(arguments[1])?[].concat(_toConsumableArray(arguments[1])):Array.prototype.slice.call(arguments,1);return 0===a.length?r:t.test(r)?(e.lastIndex=0,r.replace(e,function(e,t,r){var i=a[t];if(null==i)return"";for(;"function"==typeof i;)i=i();switch(void 0===i?"undefined":_typeof(i)){case"string":break;case"object":i=JSON.stringify(i);break;default:i=String(i)}return n(i,r?Number.parseInt(r,10):0," ")})):r}})}(),Object.defineProperty(String.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.contains called on null or undefined");return-1!==String.prototype.indexOf.apply(this,arguments)}}),Object.defineProperty(String.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.count called on null or undefined");var e=String(arguments[0]||"");if(""===e)return 0;for(var t=String.prototype.indexOf,r=e.length,n=Number(arguments[1])||0,a=0;-1!==(n=t.call(this,e,n));)++a,n+=r;return a}}),Object.defineProperty(String.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.first called on null or undefined");return _getCodePointStartAndEnd(String(this),0).char}}),Object.defineProperty(String.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.last called on null or undefined");var e=String(this);return _getCodePointStartAndEnd(e,e.length-1).char}}),Object.defineProperty(String.prototype,"splice",{configurable:!0,writable:!0,value:function(e,t,r){if(null==this)throw new TypeError("String.prototype.splice called on null or undefined");var n=this.length>>>0;if(0===n)return"";var a=Number(e);Number.isSafeInteger(a)?a<0&&(a+=n)<0&&(a=0):a=0,a>n&&(a=n);var i=Number(t);(!Number.isSafeInteger(i)||i<0)&&(i=0);var o=this.slice(0,a);return void 0!==r&&(o+=r),a+i<n&&(o+=this.slice(a+i)),o}}),Object.defineProperty(String.prototype,"splitOrEmpty",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.splitOrEmpty called on null or undefined");return""===String(this)?[]:String.prototype.split.apply(this,arguments)}}),Object.defineProperty(String.prototype,"toLocaleUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toLocaleUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toLocaleUpperCase()+e.slice(n+1)}}),Object.defineProperty(String.prototype,"toUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toUpperCase()+e.slice(n+1)}}),Object.defineProperty(Date.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:date)",this.toISOString()]}}),Object.defineProperty(Function.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)","("+this.toString()+")"]}}),Object.defineProperty(Map.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:map)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(RegExp.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)",this.toString()]}}),Object.defineProperty(Set.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:set)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(JSON,"reviveWrapper",{configurable:!0,writable:!0,value:function(e,t){if("string"!=typeof e)throw new TypeError("JSON.reviveWrapper code parameter must be a string");return["(revive:eval)",[e,t]]}}),Object.defineProperty(JSON,"_real_parse",{value:JSON.parse}),Object.defineProperty(JSON,"parse",{configurable:!0,writable:!0,value:function value(text,reviver){return JSON._real_parse(text,function(key,val){var value=val;if(Array.isArray(value)&&2===value.length)switch(value[0]){case"(revive:set)":value=new Set(value[1]);break;case"(revive:map)":value=new Map(value[1]);break;case"(revive:date)":value=new Date(value[1]);break;case"(revive:eval)":try{if(Array.isArray(value[1])){var $ReviveData$=value[1][1];value=eval(value[1][0])}else value=eval(value[1])}catch(e){}}else if("string"==typeof value&&"@@revive@@"===value.slice(0,10))try{value=eval(value.slice(10))}catch(e){}if("function"==typeof reviver)try{value=reviver(key,value)}catch(e){}return value})}}),Object.defineProperty(Array.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.contains called on null or undefined");return Array.prototype.includes.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAll called on null or undefined");return Array.prototype.includesAll.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAny called on null or undefined");return Array.prototype.includesAny.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"flatten",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatten called on null or undefined");return Array.prototype.flat.call(this,1/0)}}),Object.defineProperty(String.prototype,"readBracketedList",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.readBracketedList called on null or undefined");for(var e=new RegExp("(?:\\[\\[((?:\\s|\\S)*?)\\]\\])|([^\"'\\s]\\S*)","gm"),t=[],r=void 0;null!==(r=e.exec(this));)r[1]?t.push(r[1]):r[2]&&t.push(r[2]);return t}})}();var Browser=function(){var e=navigator.userAgent.toLowerCase(),t=e.includes("windows phone"),r=Object.freeze({Android:!t&&e.includes("android"),BlackBerry:/blackberry|bb10/.test(e),iOS:!t&&/ip(?:hone|ad|od)/.test(e),Opera:!t&&("object"===_typeof(window.operamini)||e.includes("opera mini")),Windows:t||/iemobile|wpdesktop/.test(e),any:function(){return r.Android||r.BlackBerry||r.iOS||r.Opera||r.Windows}}),n=!r.Windows&&!/khtml|trident|edge/.test(e)&&e.includes("gecko"),a=!e.includes("opera")&&/msie|trident/.test(e),i=a?function(){var t=/(?:msie\s+|rv:)(\d+\.\d)/.exec(e);return t?Number(t[1]):0}():null,o=e.includes("opera")||e.includes(" opr/"),s=o?function(){var t=new RegExp((/khtml|chrome/.test(e)?"opr":"version")+"\\/(\\d+\\.\\d+)"),r=t.exec(e);return r?Number(r[1]):0}():null,u=e.includes("vivaldi");return Object.freeze({userAgent:e,isMobile:r,isGecko:n,isIE:a,ieVersion:i,isOpera:o,operaVersion:s,isVivaldi:u})}(),Has=function(){var e=function(){try{return"function"==typeof document.createElement("audio").canPlayType}catch(e){}return!1}(),t=e&&function(){try{var e=document.createElement("audio").play();return e.catch(function(){}),e instanceof Promise}catch(e){}return!1}(),r=function(){try{return"Blob"in window&&"File"in window&&"FileList"in window&&"FileReader"in window&&!Browser.isMobile.any()&&(!Browser.isOpera||Browser.operaVersion>=15)}catch(e){}return!1}(),n=function(){try{return"geolocation"in navigator&&"function"==typeof navigator.geolocation.getCurrentPosition&&"function"==typeof navigator.geolocation.watchPosition}catch(e){}return!1}(),a=function(){try{return"MutationObserver"in window&&"function"==typeof window.MutationObserver}catch(e){}return!1}(),i=function(){try{return"performance"in window&&"function"==typeof window.performance.now}catch(e){}return!1}(),o=function(){try{return"ontouchstart"in window||!!window.DocumentTouch&&document instanceof window.DocumentTouch||!!navigator.maxTouchPoints||!!navigator.msMaxTouchPoints}catch(e){}return!1}(),s=function(){try{for(var e=new Map([["transition","transitionend"],["MSTransition","msTransitionEnd"],["WebkitTransition","webkitTransitionEnd"],["MozTransition","transitionend"]]),t=[].concat(_toConsumableArray(e.keys())),r=document.createElement("div"),n=0;n<t.length;++n)if(r.style[t[n]]!==undefined)return e.get(t[n])}catch(e){}return!1}();return Object.freeze({audio:e,audioPromise:t,fileAPI:r,geolocation:n,mutationObserver:a,performance:i,touch:o,transitionEndEvent:s})}(),Visibility=function(){function e(){return Boolean(r&&document[r.hiddenProperty])}function t(){return r&&document[r.stateProperty]||"visible"}var r=function(){try{return Object.freeze([{hiddenProperty:"hidden",stateProperty:"visibilityState",changeEvent:"visibilitychange"},{hiddenProperty:"webkitHidden",stateProperty:"webkitVisibilityState",changeEvent:"webkitvisibilitychange"},{hiddenProperty:"mozHidden",stateProperty:"mozVisibilityState",changeEvent:"mozvisibilitychange"},{hiddenProperty:"msHidden",stateProperty:"msVisibilityState",changeEvent:"msvisibilitychange"}].find(function(e){return e.hiddenProperty in document}))}catch(e){}return null}();return Object.freeze(Object.defineProperties({},{isHidden:{value:e},state:{value:t},hiddenProperty:{value:r.hiddenProperty},stateProperty:{value:r.stateProperty},changeEvent:{value:r.changeEvent}}))}(),_ref3=function(){function e(t){if("object"!==(void 0===t?"undefined":_typeof(t))||null===t)return t;if(t instanceof String)return String(t);if(t instanceof Number)return Number(t);if(t instanceof Boolean)return Boolean(t);if("function"==typeof t.clone)return t.clone(!0);if(t.nodeType&&"function"==typeof t.cloneNode)return t.cloneNode(!0);var r=void 0;return t instanceof Array?r=new Array(t.length):t instanceof Date?r=new Date(t.getTime()):t instanceof Map?(r=new Map,t.forEach(function(t,n){return r.set(n,e(t))})):t instanceof RegExp?r=new RegExp(t):t instanceof Set?(r=new Set,t.forEach(function(t){return r.add(e(t))})):r=Object.create(Object.getPrototypeOf(t)),Object.keys(t).forEach(function(n){return r[n]=e(t[n])}),r}function t(e){for(var t=document.createDocumentFragment(),r=document.createElement("p"),n=void 0;null!==(n=e.firstChild);){if(n.nodeType===Node.ELEMENT_NODE){switch(n.nodeName.toUpperCase()){case"BR":if(null!==n.nextSibling&&n.nextSibling.nodeType===Node.ELEMENT_NODE&&"BR"===n.nextSibling.nodeName.toUpperCase()){e.removeChild(n.nextSibling),e.removeChild(n),t.appendChild(r),r=document.createElement("p");continue}if(!r.hasChildNodes()){e.removeChild(n);continue}break;case"ADDRESS":case"ARTICLE":case"ASIDE":case"BLOCKQUOTE":case"CENTER":case"DIV":case"DL":case"FIGURE":case"FOOTER":case"FORM":case"H1":case"H2":case"H3":case"H4":case"H5":case"H6":case"HEADER":case"HR":case"MAIN":case"NAV":case"OL":case"P":case"PRE":case"SECTION":case"TABLE":case"UL":r.hasChildNodes()&&(t.appendChild(r),r=document.createElement("p")),t.appendChild(n);continue}}r.appendChild(n)}r.hasChildNodes()&&t.appendChild(r),e.appendChild(t)}function r(){try{return document.activeElement||null}catch(e){return null}}function n(e,t,r){var n="object"===(void 0===e?"undefined":_typeof(e))?e:document.getElementById(e);if(null==n)return null;var a=Array.isArray(t)?t:[t];jQuery(n).empty();for(var i=0,o=a.length;i<o;++i)if(Story.has(a[i]))return new Wikifier(n,Story.get(a[i]).processText().trim()),n;if(null!=r){var s=String(r).trim();""!==s&&new Wikifier(n,s)}return n}function a(e,t,r){var n=jQuery(document.createElement("div")),a=jQuery(document.createElement("button")),i=jQuery(document.createElement("pre")),o=L10n.get("errorTitle")+": "+(t||"unknown error");return a.addClass("error-toggle").ariaClick({label:L10n.get("errorToggle")},function(){a.hasClass("enabled")?(a.removeClass("enabled"),i.attr({"aria-hidden":!0,hidden:"hidden"})):(a.addClass("enabled"),i.removeAttr("aria-hidden hidden"))}).appendTo(n),jQuery(document.createElement("span")).addClass("error").text(o).appendTo(n),jQuery(document.createElement("code")).text(r).appendTo(i),i.addClass("error-source").attr({"aria-hidden":!0,hidden:"hidden"}).appendTo(n),n.addClass("error-view").appendTo(e),console.warn(o+"\n\t"+r.replace(/\n/g,"\n\t")),!1}function i(e,t){var r=i;switch(void 0===e?"undefined":_typeof(e)){case"number":if(Number.isNaN(e))return t;break;case"object":if(null===e)return t;if(Array.isArray(e))return e.map(function(e){return r(e,t)}).join(", ");if(e instanceof Set)return[].concat(_toConsumableArray(e)).map(function(e){return r(e,t)}).join(", ");if(e instanceof Map){return"{ "+[].concat(_toConsumableArray(e)).map(function(e){var n=_slicedToArray(e,2),a=n[0],i=n[1];return r(a,t)+" → "+r(i,t)}).join(", ")+" }"}return e instanceof Date?e.toLocaleString():"function"==typeof e.toString?e.toString():Object.prototype.toString.call(e);case"function":case"undefined":return t}return String(e)}return Object.freeze(Object.defineProperties({},{clone:{value:e},convertBreaks:{value:t},safeActiveElement:{value:r},setPageElement:{value:n},throwError:{value:a},toStringOrDefault:{value:i}}))
