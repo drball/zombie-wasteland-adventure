@@ -10,7 +10,7 @@ Commit to git
 Launch Phonegap build: https://build.phonegap.com/apps/3874384/builds
 Pull the latest from git
 Select the zombie keystore file (you need this to be able to upload to Google Play)
-You may need to unlock the key by providing the password
+You may need to unlock the key by providing the password (char & car reg num)
 Download the APK file
 In Google Play Developer Console, upload the APK file
 Release new version
